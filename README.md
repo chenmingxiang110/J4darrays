@@ -34,11 +34,14 @@ Output:
 ## API
 
 ### Variable
-|Function Name |Type |Return |
-|---           |---  |---    |
+|Function Name |Inputs |Type |Return |Description |
+|---           |---    |---  |---    |---         |
+|Variable|(String str, int[] dimens, String initialization)|Initialization|None|Initialize the variable with the variable name, dimension, and initializer. The initializer can be "zeros", "random" or "xavier" so far.|
 
 ### NdArrayUtils
-
+|Function Name |Inputs |Type |Return |Description |
+|---           |---    |---  |---    |---         |
 
 ### NdArrayMath
-
+|Function Name |Inputs |Type |Return |Description |
+|---           |---    |---  |---    |---         |
