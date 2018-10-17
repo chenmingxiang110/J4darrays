@@ -11,6 +11,7 @@ public class UnitTests {
 //        testSaveLoad();
 //        testMath1();
 //        testUtils3();
+//        testPrint();
         System.out.println("");
         System.out.println("The test is very limited, please feel free to add more tests.");
     }
@@ -163,6 +164,11 @@ public class UnitTests {
         System.out.println(NdArrayUtils.mean(v3, 1));
         System.out.println(Arrays.toString(NdArrayUtils.transpose(v3, new int[]{2,0,1}).getShape()));
         System.out.println(NdArrayUtils.reshape(v3, new int[]{18,9}));
+    }
+
+    public static void testPrint() {
+        Variable v4 = new Variable("v4", new int[]{3,6,9,12}, "xavier");
+        System.out.println(v4);
     }
 
 }

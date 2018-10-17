@@ -1610,4 +1610,81 @@ public class NdArrayMath {
         return result/mod;
     }
 
+    public static float sigmoid(float f) {
+        return (float)(1.0/(1.0+Math.exp(-f)));
+    }
+
+    public static Variable sigmoid(Variable v) {
+        return pow(NdArrayUtils.elementWiseAdd(exp(NdArrayUtils.elementWiseMultiply(v, -1)), 1), -1);
+    }
+
+    public static Variable sigmoid(Variable v, String resultName) {
+        Variable variable = pow(NdArrayUtils.elementWiseAdd(exp(NdArrayUtils.elementWiseMultiply(v, -1)), 1), -1);
+        variable.setName(resultName);
+        return variable;
+    }
+
+    public static float sigmoid(float f, float bias, float var) {
+        float g = (f-bias)/var;
+        return (float)(1.0/(1.0+Math.exp(-g)));
+    }
+
+    public static Variable sigmoid(Variable v, float bias, float var) {
+        float[] values = NdArrayUtils.flatten(v).get1d();
+        for (int i = 0 ; i<values.length ; i++) {
+            values[i] = sigmoid(values[i], bias, var);
+        }
+        return NdArrayUtils.reshape(new Variable(values), v.getShape());
+    }
+
+    public static Variable sigmoid(Variable v, float bias, float var, String resultName) {
+        float[] values = NdArrayUtils.flatten(v).get1d();
+        for (int i = 0 ; i<values.length ; i++) {
+            values[i] = sigmoid(values[i], bias, var);
+        }
+        return NdArrayUtils.reshape(new Variable(values), v.getShape(), resultName);
+    }
+
+    public static float elu(float f) {
+        if (f<0) return (float)Math.exp(f);
+        return f+1;
+    }
+
+    public static Variable elu(Variable v) {
+        float[] values = NdArrayUtils.flatten(v).get1d();
+        for (int i = 0 ; i<values.length ; i++) {
+            values[i] = elu(values[i]);
+        }
+        return NdArrayUtils.reshape(new Variable(values), v.getShape());
+    }
+
+    public static Variable elu(Variable v, String resultName) {
+        float[] values = NdArrayUtils.flatten(v).get1d();
+        for (int i = 0 ; i<values.length ; i++) {
+            values[i] = elu(values[i]);
+        }
+        return NdArrayUtils.reshape(new Variable(values), v.getShape(), resultName);
+    }
+
+    public static float relu(float f) {
+        if (f<0) return 0;
+        return f;
+    }
+
+    public static Variable relu(Variable v) {
+        float[] values = NdArrayUtils.flatten(v).get1d();
+        for (int i = 0 ; i<values.length ; i++) {
+            values[i] = relu(values[i]);
+        }
+        return NdArrayUtils.reshape(new Variable(values), v.getShape());
+    }
+
+    public static Variable relu(Variable v, String resultName) {
+        float[] values = NdArrayUtils.flatten(v).get1d();
+        for (int i = 0 ; i<values.length ; i++) {
+            values[i] = relu(values[i]);
+        }
+        return NdArrayUtils.reshape(new Variable(values), v.getShape(), resultName);
+    }
+
 }

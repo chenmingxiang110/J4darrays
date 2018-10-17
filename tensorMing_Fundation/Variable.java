@@ -471,9 +471,9 @@ public class Variable {
     public String toString() {
         if (dimension == 1) {
             if (v1.length<=100) {
-                return Arrays.toString(v1)+"\n";
+                return Arrays.toString(v1);
             } else {
-                return "["+v1[0]+", "+v1[1]+", "+v1[2]+", ... , "+v1[v1.length-1]+"]\n";
+                return "["+v1[0]+", "+v1[1]+", "+v1[2]+", ... , "+v1[v1.length-1]+"]";
             }
         }
         if (dimension == 2) {
@@ -484,7 +484,7 @@ public class Variable {
                     if (i!=0) sb.append("  ");
                     sb.append(Arrays.toString(v2[i]));
                     if (i==(v2.length-1)) sb.append(" ]");
-                    sb.append("\n");
+                    if (i<(v2.length-1)) sb.append("\n");
                 }
                 return sb.toString();
             } else if (v2.length>20 && v2[0].length<=100){
@@ -497,7 +497,6 @@ public class Variable {
                 }
                 sb.append("   ...\n  ");
                 sb.append("["+v2[v2.length-1][0]+", "+v2[v2.length-1][1]+", "+v2[v2.length-1][2]+", ... , "+v2[v2.length-1][v2.length-1]+"] ]");
-                sb.append("\n");
                 return sb.toString();
             } else if (v2.length<=20 && v2[0].length>100){
                 StringBuilder sb = new StringBuilder();
@@ -506,7 +505,7 @@ public class Variable {
                     if (i!=0) sb.append("  ");
                     sb.append("["+v2[i][0]+", "+v2[i][1]+", "+v2[i][2]+", ... , "+v2[i][v2.length-1]+"]");
                     if (i==(v2.length-1)) sb.append(" ]");
-                    sb.append("\n");
+                    if (i<(v2.length-1)) sb.append("\n");
                 }
                 return sb.toString();
             } else {
@@ -519,10 +518,53 @@ public class Variable {
                 }
                 sb.append("   ...\n  ");
                 sb.append("["+v2[v2.length-1][0]+", "+v2[v2.length-1][1]+", "+v2[v2.length-1][2]+", ... , "+v2[v2.length-1][v2.length-1]+"] ]");
-                sb.append("\n");
                 return sb.toString();
             }
         }
-        return "I am too dumb to print out 3d or higher dimension arrays.";
+        if (dimension == 3) {
+            if (v3.length<=20) {
+                StringBuilder sb = new StringBuilder();
+                sb.append("[");
+                for (int i = 0 ; i<v3.length ; i++) {
+                    sb.append(new Variable((v3[i])));
+                    if (i<v3.length-1) sb.append("\n\n");
+                }
+                sb.append("]");
+                return sb.toString();
+            } else {
+                StringBuilder sb = new StringBuilder();
+                sb.append("[");
+                for (int i = 0 ; i<3 ; i++) {
+                    sb.append(new Variable((v3[i])));
+                    sb.append("\n\n");
+                }
+                sb.append(new Variable((v3[v3.length-1])));
+                sb.append("]");
+                return sb.toString();
+            }
+        }
+        if (dimension == 4) {
+            if (v4.length<=20) {
+                StringBuilder sb = new StringBuilder();
+                sb.append("[");
+                for (int i = 0 ; i<v4.length ; i++) {
+                    sb.append(new Variable((v4[i])));
+                    if (i<v4.length-1) sb.append("\n\n\n");
+                }
+                sb.append("]");
+                return sb.toString();
+            } else {
+                StringBuilder sb = new StringBuilder();
+                sb.append("[");
+                for (int i = 0 ; i<3 ; i++) {
+                    sb.append(new Variable((v4[i])));
+                    sb.append("\n\n\n");
+                }
+                sb.append(new Variable((v4[v4.length-1])));
+                sb.append("]");
+                return sb.toString();
+            }
+        }
+        return "Wrong data.";
     }
 }

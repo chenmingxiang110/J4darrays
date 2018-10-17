@@ -7,6 +7,46 @@ public class NdArrayUtils {
 
     public NdArrayUtils() {}
 
+    public static boolean equals(Variable v1, Variable v2) {
+        int[] vShape = v2.getShape();
+        int[] mShape = v1.getShape();
+        if (!(Arrays.equals(vShape, mShape))) {
+            return false;
+        }
+        if (mShape.length == 1) {
+            return Arrays.equals(v1.get1d(), v2.get1d());
+        } else if (mShape.length == 2) {
+            float[][] mValue = v1.get2d();
+            float[][] vValue = v2.get2d();
+            for (int i = 0 ; i<mShape[0] ; i++) {
+                if (!Arrays.equals(mValue[i], vValue[i])) return false;
+            }
+            return true;
+        } else if (mShape.length == 3) {
+            float[][][] mValue = v1.get3d();
+            float[][][] vValue = v2.get3d();
+            for (int i = 0 ; i<mShape[0] ; i++) {
+                for (int j = 0 ; j<mShape[1] ; j++) {
+                    if (!Arrays.equals(mValue[i][j], vValue[i][j])) return false;
+                }
+            }
+            return true;
+        } else if (mShape.length == 4) {
+            float[][][][] mValue = v1.get4d();
+            float[][][][] vValue = v2.get4d();
+            for (int i = 0 ; i<mShape[0] ; i++) {
+                for (int j = 0 ; j<mShape[1] ; j++) {
+                    for (int k = 0 ; k<mShape[2] ; k++) {
+                        if (!Arrays.equals(mValue[i][j][k], vValue[i][j][k])) return false;
+                    }
+                }
+            }
+            return true;
+        } else {
+            throw new IllegalArgumentException("I have no idea what is going on.");
+        }
+    }
+
     public static float[] flatten(float[] inputValues) {
         return inputValues;
     }
@@ -100,6 +140,27 @@ public class NdArrayUtils {
         float sum = (float) 0.0;
         for (float i : inputValues) sum+=i;
         return sum/inputValues.length;
+    }
+
+    public static float mean(float[][] inputValues) {
+        float[] fInput = flatten(inputValues);
+        float sum = (float) 0.0;
+        for (float i : fInput) sum+=i;
+        return sum/fInput.length;
+    }
+
+    public static float mean(float[][][] inputValues) {
+        float[] fInput = flatten(inputValues);
+        float sum = (float) 0.0;
+        for (float i : fInput) sum+=i;
+        return sum/fInput.length;
+    }
+
+    public static float mean(float[][][][] inputValues) {
+        float[] fInput = flatten(inputValues);
+        float sum = (float) 0.0;
+        for (float i : fInput) sum+=i;
+        return sum/fInput.length;
     }
 
     public static float mean(Variable v) {
@@ -230,6 +291,58 @@ public class NdArrayUtils {
         float sum = (float) 0.0;
         for (float i : inputValues) sum+=(Math.pow((i-mean),2));
         sum/=(inputValues.length-1);
+        return (float) Math.sqrt(sum);
+    }
+
+    public static float std(float[][] inputValues) {
+        float[] fInput = flatten(inputValues);
+        if (fInput.length == 1) return 0;
+        float mean = mean(fInput);
+        float sum = (float) 0.0;
+        for (float i : fInput) sum+=(Math.pow((i-mean),2));
+        sum/=(fInput.length-1);
+        return (float) Math.sqrt(sum);
+    }
+
+    public static float std(float[][][] inputValues) {
+        float[] fInput = flatten(inputValues);
+        if (fInput.length == 1) return 0;
+        float mean = mean(fInput);
+        float sum = (float) 0.0;
+        for (float i : fInput) sum+=(Math.pow((i-mean),2));
+        sum/=(fInput.length-1);
+        return (float) Math.sqrt(sum);
+    }
+
+    public static float std(float[][][][] inputValues) {
+        float[] fInput = flatten(inputValues);
+        if (fInput.length == 1) return 0;
+        float mean = mean(fInput);
+        float sum = (float) 0.0;
+        for (float i : fInput) sum+=(Math.pow((i-mean),2));
+        sum/=(fInput.length-1);
+        return (float) Math.sqrt(sum);
+    }
+
+    public static float std(Variable v) {
+        int dim = v.getDimension();
+        float[] values;
+        if (dim == 1) {
+            values = flatten(v.get1d());
+        } else if (dim == 2) {
+            values = flatten(v.get2d());
+        } else if (dim == 3) {
+            values = flatten(v.get3d());
+        } else if (dim == 4) {
+            values = flatten(v.get4d());
+        } else {
+            throw new IllegalArgumentException("Invalid variable shape.");
+        }
+        if (values.length == 1) return 0;
+        float mean = mean(values);
+        float sum = (float) 0.0;
+        for (float i : values) sum+=(Math.pow((i-mean),2));
+        sum/=(values.length-1);
         return (float) Math.sqrt(sum);
     }
 
