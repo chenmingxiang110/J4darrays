@@ -41,14 +41,18 @@ Output:
 |Variable|(String str, float[][] values)|Initialization|None|Initialize the variable with a name and values.|
 |Variable|(String str, float[][][] values)|Initialization|None|Initialize the variable with a name and values.|
 |Variable|(String str, float[][][][] values)|Initialization|None|Initialize the variable with a name and values.|
-|Variable|(float[] values)|Initialization|None|Initialize the variable with values.|
-|Variable|(float[][] values)|Initialization|None|Initialize the variable with values.|
-|Variable|(float[][][] values)|Initialization|None|Initialize the variable with values.|
-|Variable|(float[][][][] values)|Initialization|None|Initialize the variable with values.|
+|Variable|(float[] values)|Initialization|None|Initialize the variable with values. The name is set as "temp".|
+|Variable|(float[][] values)|Initialization|None|Initialize the variable with values. The name is set as "temp".|
+|Variable|(float[][][] values)|Initialization|None|Initialize the variable with values. The name is set as "temp".|
+|Variable|(float[][][][] values)|Initialization|None|Initialize the variable with values. The name is set as "temp".|
 |Variable|(String str, String filePath)|Initialization|None|Initialize the variable by loading from a file.|
 |save|(String filePath)|Method|Boolean|Save the variable to a the filepath. Usually a txt file. Return true if the file is successfully saved.|
 |load|(String filePath)|Method|Boolean|Load the variable from a the filepath. Usually a txt file. Return true if the file is successfully loaded.|
 |equals|(Variable v)|Method|Boolean|Return true if the value and the shape of the given variable v is equal to the current one.|
+|getName|None|Method|String|Return the name of the current variable.|
+|setName|(String name)|Method|None|Set the name of the current variable as the input.|
+|getShape|None|Method|int[]|Return an array which is the shape of the current variable. For example, the return of a 3 by 4 matrix is [3,4]|
+
 
 
 ### NdArrayUtils
