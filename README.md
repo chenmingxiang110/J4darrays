@@ -65,12 +65,13 @@ Output:
 |get2d|None|Method|float[][]|Return a float array if the dimension is 2, or it will return null.|
 |get3d|None|Method|float[][][]|Return a float array if the dimension is 3, or it will return null.|
 |get4d|None|Method|float[][][][]|Return a float array if the dimension is 4, or it will return null.|
-|toString|None|Method|String|toString.|
+|toString|None|Method|String|Override the toString method.|
 
 
 ### NdArrayUtils
 |Function Name |Inputs |Type |Return |Description |
 |---           |---    |---  |---    |---         |
+|equals|(Variable v1, Variable v2)|Static Method|Boolean|Return true if the values of the two variables are the same.|
 
 ### NdArrayMath
 |Function Name |Inputs |Type |Return |Description |
