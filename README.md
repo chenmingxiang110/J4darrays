@@ -36,31 +36,31 @@ Output:
 ### Variable
 |Function Name |Inputs |Type |Return |Description |
 |---           |---    |---  |---    |---         |
-|Variable|(String str, int[] dimens, String initialization)|Initialization|None|Initialize the variable with the variable name, dimension, and initializer. The initializer can be "zeros", "random" or "xavier" so far.|
-|Variable|(String str, float[] values)|Initialization|None|Initialize the variable with a name and values.|
-|Variable|(String str, float[][] values)|Initialization|None|Initialize the variable with a name and values.|
-|Variable|(String str, float[][][] values)|Initialization|None|Initialize the variable with a name and values.|
-|Variable|(String str, float[][][][] values)|Initialization|None|Initialize the variable with a name and values.|
-|Variable|(float[] values)|Initialization|None|Initialize the variable with values. The name is set as "temp".|
-|Variable|(float[][] values)|Initialization|None|Initialize the variable with values. The name is set as "temp".|
-|Variable|(float[][][] values)|Initialization|None|Initialize the variable with values. The name is set as "temp".|
-|Variable|(float[][][][] values)|Initialization|None|Initialize the variable with values. The name is set as "temp".|
-|Variable|(String str, String filePath)|Initialization|None|Initialize the variable by loading from a file.|
-|save|(String filePath)|Method|Boolean|Save the variable to a the filepath. Usually a txt file. Return true if the file is successfully saved.|
-|load|(String filePath)|Method|Boolean|Load the variable from a the filepath. Usually a txt file. Return true if the file is successfully loaded.|
-|equals|(Variable v)|Method|Boolean|Return true if the value and the shape of the given variable v is equal to the current one.|
+|Variable|String str, int[] dimens, String initialization|Initialization|None|Initialize the variable with the variable name, dimension, and initializer. The initializer can be "zeros", "random" or "xavier" so far.|
+|Variable|String str, float[] values|Initialization|None|Initialize the variable with a name and values.|
+|Variable|String str, float[][] values|Initialization|None|Initialize the variable with a name and values.|
+|Variable|String str, float[][][] values|Initialization|None|Initialize the variable with a name and values.|
+|Variable|String str, float[][][][] values|Initialization|None|Initialize the variable with a name and values.|
+|Variable|float[] values|Initialization|None|Initialize the variable with values. The name is set as "temp".|
+|Variable|float[][] values|Initialization|None|Initialize the variable with values. The name is set as "temp".|
+|Variable|float[][][] values|Initialization|None|Initialize the variable with values. The name is set as "temp".|
+|Variable|float[][][][] values|Initialization|None|Initialize the variable with values. The name is set as "temp".|
+|Variable|String str, String filePath|Initialization|None|Initialize the variable by loading from a file.|
+|save|String filePath|Method|Boolean|Save the variable to a the filepath. Usually a txt file. Return true if the file is successfully saved.|
+|load|String filePath|Method|Boolean|Load the variable from a the filepath. Usually a txt file. Return true if the file is successfully loaded.|
+|equals|Variable v|Method|Boolean|Return true if the value and the shape of the given variable v is equal to the current one.|
 |getName|None|Method|String|Return the name of the current variable.|
-|setName|(String name)|Method|None|Set the name of the current variable as the input.|
+|setName|String name|Method|None|Set the name of the current variable as the input.|
 |getShape|None|Method|int[]|Return an array which is the shape of the current variable. For example, the return of a 3 by 4 matrix is {3,4}|
 |getDimension|None|Method|int|Return the dimension of the current variable. For example, the return of a 3 by 4 matrix is 2.|
-|setValue|(float[] value)|Method|None|Set the value and change the dimension & shape.|
-|setValue|(float[][] value)|Method|None|Set the value and change the dimension & shape.|
-|setValue|(float[][][] value)|Method|None|Set the value and change the dimension & shape.|
-|setValue|(float[][][][] value)|Method|None|Set the value and change the dimension & shape.|
-|importValues|(float[] value)|Method|None|Set the value with the input. If the shape and dimension of the input and the current variable does not match, throw a NumberFormatException.|
-|importValues|(float[][] value)|Method|None|Set the value with the input. If the shape and dimension of the input and the current variable does not match, throw a NumberFormatException.|
-|importValues|(float[][][] value)|Method|None|Set the value with the input. If the shape and dimension of the input and the current variable does not match, throw a NumberFormatException.|
-|importValues|(float[][][][] value)|Method|None|Set the value with the input. If the shape and dimension of the input and the current variable does not match, throw a NumberFormatException.|
+|setValue|float[] value|Method|None|Set the value and change the dimension & shape.|
+|setValue|float[][] value|Method|None|Set the value and change the dimension & shape.|
+|setValue|float[][][] value|Method|None|Set the value and change the dimension & shape.|
+|setValue|float[][][][] value|Method|None|Set the value and change the dimension & shape.|
+|importValues|float[] value|Method|None|Set the value with the input. If the shape and dimension of the input and the current variable does not match, throw a NumberFormatException.|
+|importValues|float[][] value|Method|None|Set the value with the input. If the shape and dimension of the input and the current variable does not match, throw a NumberFormatException.|
+|importValues|float[][][] value|Method|None|Set the value with the input. If the shape and dimension of the input and the current variable does not match, throw a NumberFormatException.|
+|importValues|float[][][][] value|Method|None|Set the value with the input. If the shape and dimension of the input and the current variable does not match, throw a NumberFormatException.|
 |get1d|None|Method|float[]|Return a float array if the dimension is 1, or it will return null.|
 |get2d|None|Method|float[][]|Return a float array if the dimension is 2, or it will return null.|
 |get3d|None|Method|float[][][]|Return a float array if the dimension is 3, or it will return null.|
@@ -71,7 +71,7 @@ Output:
 ### NdArrayUtils
 |Function Name |Inputs |Type |Return |Description |
 |---           |---    |---  |---    |---         |
-|equals|(Variable v1, Variable v2)|Static Method|Boolean|Return true if the values of the two variables are the same.|
+|equals|Variable v1, Variable v2|Static Method|Boolean|Return true if the values of the two variables are the same.|
 
 ### NdArrayMath
 |Function Name |Inputs |Type |Return |Description |
