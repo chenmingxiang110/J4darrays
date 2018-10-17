@@ -37,6 +37,19 @@ Output:
 |Function Name |Inputs |Type |Return |Description |
 |---           |---    |---  |---    |---         |
 |Variable|(String str, int[] dimens, String initialization)|Initialization|None|Initialize the variable with the variable name, dimension, and initializer. The initializer can be "zeros", "random" or "xavier" so far.|
+|Variable|(String str, float[] values)|Initialization|None|Initialize the variable with a name and values.|
+|Variable|(String str, float[][] values)|Initialization|None|Initialize the variable with a name and values.|
+|Variable|(String str, float[][][] values)|Initialization|None|Initialize the variable with a name and values.|
+|Variable|(String str, float[][][][] values)|Initialization|None|Initialize the variable with a name and values.|
+|Variable|(float[] values)|Initialization|None|Initialize the variable with values.|
+|Variable|(float[][] values)|Initialization|None|Initialize the variable with values.|
+|Variable|(float[][][] values)|Initialization|None|Initialize the variable with values.|
+|Variable|(float[][][][] values)|Initialization|None|Initialize the variable with values.|
+|Variable|(String str, String filePath)|Initialization|None|Initialize the variable by loading from a file.|
+|save|(String filePath)|Method|Boolean|Save the variable to a the filepath. Usually a txt file. Return true if the file is successfully saved.|
+|load|(String filePath)|Method|Boolean|Load the variable from a the filepath. Usually a txt file. Return true if the file is successfully loaded.|
+|equals|(Variable v)|Method|Boolean|Return true if the value and the shape of the given variable v is equal to the current one.|
+
 
 ### NdArrayUtils
 |Function Name |Inputs |Type |Return |Description |
