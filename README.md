@@ -543,6 +543,22 @@ Smart Init Fit
 ### Preprocessing
 |Function Name |Inputs |Type |Return |Description |
 |---           |---    |---  |---    |---         |
+|oneHotArray|int index, int size|Static Method|float[]|Return an array where the result[index] is one, and the rest are zeros.|
+|oneHot|int index, int size|Static Method|Variable|Return a variable, and the value of which is an array where the result[index] is one, and the rest are zeros.The name of the variable is "temp".|
+|oneHot|int index, int size, String resultName|Static Method|Variable|Return a variable, and the value of which is an array where the result[index] is one, and the rest are zeros. The name of the variable is the third input.|
+|nHotArray|int[] indices, int size|Static Method|float[]|-|
+|nHot|int[] indices, int size|Static Method|Variable|-|
+|nHot|int[] indices, int size, String resultName|Static Method|Variable|-|
+|normalize|Variable v|Static Method|Variable|-|
+|normalize|Variable v, String resultName|Static Method|Variable|-|
+|normalize|Variable v, float scale, float bias|Static Method|Variable|-|
+|normalize|Variable v, float scale, float bias, String resultName|Static Method|Variable|-|
+|scale|Variable v|Static Method|Variable|-|
+|scale|Variable v, String resultName|Static Method|Variable|-|
+|scale|Variable v, float max|Static Method|Variable|-|
+|scale|Variable v, float max, String resultName|Static Method|Variable|-|
+|scale|Variable v, float min, float max|Static Method|Variable|-|
+|scale|Variable v, float min, float max, String resultName|Static Method|Variable|-|
 
 ### ClusterDBScan
 |Function Name |Inputs |Type |Return |Description |
