@@ -159,6 +159,33 @@ Process finished with exit code 0
 |Function Name |Inputs |Type |Return |Description |
 |---           |---    |---  |---    |---         |
 |equals|Variable v1, Variable v2|Static Method|Boolean|Return true if the values of the two variables are the same.|
+|flatten|float[] inputValues|Static Method|float[]|Reshape the input array into an 1d-array.|
+|flatten|float[][] inputValues|Static Method|float[]|Reshape the input array into an 1d-array.|
+|flatten|float[][][] inputValues|Static Method|float[]|Reshape the input array into an 1d-array.|
+|flatten|float[][][][] inputValues|Static Method|float[]|Reshape the input array into an 1d-array.|
+|flatten|Variable v|Static Method|Variable|Reshape the input variable. The shape of the output equals to int[]{N}, where N equals to the number of elements in the input variable. The name of the output variable is "temp".|
+|flatten|Variable v, String resultName|Static Method|Variable|Reshape the input variable. The shape of the output equals to int[]{N}, where N equals to the number of elements in the input variable. The name of the output variable is the second input.|
+|sum|Variable v|Static Method|float|Return the sum of all the elements in the input variable.|
+|multiplication|Variable v|Static Method|float|Return the result of multiplying all the elements in the input variable.|
+|mean|float[] inputValues|Static Method|float|Return the mean of all elements in the input array.|
+|mean|float[][] inputValues|Static Method|float|Return the mean of all elements in the input array.|
+|mean|float[][][] inputValues|Static Method|float|Return the mean of all elements in the input array.|
+|mean|float[][][][] inputValues|Static Method|float|Return the mean of all elements in the input array.|
+|mean|Variable v|Static Method|float|Return the mean of all elements in the input variable.|
+|meanDim1|Variable v|Static Method|Variable|Return the mean of all elements in the input variable along the first axis. For example, let 'a' be a variable with values of [[1,2],[3,4]], then the output would be a variable with values of [1.5, 3.5]|
+|mean|Variable v, int axis|Static Method|Variable|Return the mean of all elements in the input variable along any axis. For example, let 'a' be a variable with values of [[1,2],[3,4]] and the axis is 1, then the output would be a variable with values of [2, 3]|
+|std|float[] inputValues|Static Method|float|Return the standard deviation of all elements in the input array.|
+|std|float[][] inputValues|Static Method|float|Return the standard deviation of all elements in the input array.|
+|std|float[][][] inputValues|Static Method|float|Return the standard deviation of all elements in the input array.|
+|std|float[][][][] inputValues|Static Method|float|Return the standard deviation of all elements in the input array.|
+|std|Variable v|Static Method|float|Return the standard deviation of all elements in the input variable.|
+|addDim1d|Variable v|Static Method|Variable|Add one dimension to the beginning of the shape. For example, the input variable is a 2d-array with a shape of [2,3], then in the output variable, the values are not changed, but the shape becomes [1,2,3]|
+|matmul|Variable v1, Variable v2|Static Method|Variable|Do matrix multiplication to the inputs. The inputs should be matrix (2d-arrays). The name of the output is "temp".|
+|matmul|Variable v1, Variable v2, String resultName|Static Method|Variable|Do matrix multiplication to the inputs. The inputs should be matrix (2d-arrays). The name of the output is the second input.|
+|transpose|Variable v|Static Method|Variable|Transpose the input matrix. The inputs should be matrix (2d-arrays). The name of the output is "temp".|
+|transpose|Variable v, String resultName|Transpose the input matrix. The inputs should be matrix (2d-arrays). The name of the output is the second input.|
+|transpose|Variable v, int[] t|Static Method|Variable|Transpose the input array by indicating the sequence of the axis. The inputs do not need to be a matrix (2d-arrays). The name of the output is "temp". For example, if the input variable has a shape of [2,4,5], and the second input is [1,0,2], then the output would be a variable with a shape of [4,2,5].|
+|transpose|Variable v, int[] t, String resultName|Static Method|Variable|Transpose the input array by indicating the sequence of the axis. The inputs do not need to be a matrix (2d-arrays). The name of the output is the third input. For example, if the input variable has a shape of [2,4,5], and the second input is [1,0,2], then the output would be a variable with a shape of [4,2,5].|
 
 ### NdArrayMath
 |Function Name |Inputs |Type |Return |Description |
