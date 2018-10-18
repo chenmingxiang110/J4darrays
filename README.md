@@ -248,10 +248,18 @@ Process finished with exit code 0
 |atan|Variable v, String resultName|Static Method|Variable|-|
 |sqrt|Variable v, String resultName|Static Method|Variable|-|
 |pow|Variable v, float num, String resultName|Static Method|Variable|-|
+|modularL|Variable v|Static Method|float|Modular length.|
+|distance|Variable v1, Variable v2|Static Method|float|-|
+|cosineSim|Variable v1, Variable v2|Static Method|float|Cosine simlarity.|
 
 ### Random
 |Function Name |Inputs |Type |Return |Description |
 |---           |---    |---  |---    |---         |
+|randInt|float[] probs|Static Method|int|Return a random integer with probabilities. The range is between 0 and the size of the input (exclusive).|
+|randInt|int min, int max|Static Method|int|Return a random integer. The range is between min and max (exclusive).|
+|random|None|Static Method|float|Return a random float between 0 and 1.|
+|sampling|int size, int maximum, boolean repeat|Static Method|int[]|Return a series of index randomly sampled between 0 and max (exclusive). The size of the output equals to the first input. If repeat is false, then the elements in the result will not be repeated (once sampled, never sampled again).|
+|sampling|int size, int maximum, boolean repeat|Static Method|int[]|Return a series of index sampled with probabilities between 0 and the size of the probabilities (exclusive). The size of the output equals to the first input. If repeat is false, then the elements in the result will not be repeated (once sampled, never sampled again).|
 
 ## API: tensorMing_Learn
 
