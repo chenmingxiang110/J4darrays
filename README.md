@@ -192,7 +192,6 @@ Process finished with exit code 0
 |repeat|Variable v, int objTime, String resultName|Static Method|Variable|Repeat the variable n times. For example, let 'a' be a variable with a shape of [4,5], then the output of repeat(a, 3) is a variable with a shape of [3,4,5]. The name of the output is the third input.|
 |concatenate|ArrayList<Variable> av|Static Method|Variable|Concatenate the list of variables. The name of the output is "temp".|
 |concatenate|ArrayList<Variable> av|Static Method|Variable|Concatenate the list of variables. The name of the output is "temp".|
-
 |min|Variable v|Static Method|float|Return the minimum of all elements in the input variable.|
 |max|Variable v|Static Method|float|Return the maximum of all elements in the input variable.|
 |split|Variable array1d, int length, int stride|Static Method|Variable|Split by frames.|
