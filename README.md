@@ -218,6 +218,36 @@ Process finished with exit code 0
 ### NdArrayMath
 |Function Name |Inputs |Type |Return |Description |
 |---           |---    |---  |---    |---         |
+|abs|Variable v|Static Method|Variable|-|
+|exp|Variable v|Static Method|Variable|-|
+|log|Variable v|Static Method|Variable|-|
+|log10|Variable v|Static Method|Variable|-|
+|sin|Variable v|Static Method|Variable|-|
+|sinh|Variable v|Static Method|Variable|-|
+|asin|Variable v|Static Method|Variable|-|
+|cos|Variable v|Static Method|Variable|-|
+|cosh|Variable v|Static Method|Variable|-|
+|acos|Variable v|Static Method|Variable|-|
+|tan|Variable v|Static Method|Variable|-|
+|tanh|Variable v|Static Method|Variable|-|
+|atan|Variable v|Static Method|Variable|-|
+|sqrt|Variable v|Static Method|Variable|-|
+|pow|Variable v, float num|Static Method|Variable|-|
+|abs|Variable v, String resultName|Static Method|Variable|-|
+|exp|Variable v, String resultName|Static Method|Variable|-|
+|log|Variable v, String resultName|Static Method|Variable|-|
+|log10|Variable v, String resultName|Static Method|Variable|-|
+|sin|Variable v, String resultName|Static Method|Variable|-|
+|sinh|Variable v, String resultName|Static Method|Variable|-|
+|asin|Variable v, String resultName|Static Method|Variable|-|
+|cos|Variable v, String resultName|Static Method|Variable|-|
+|cosh|Variable v, String resultName|Static Method|Variable|-|
+|acos|Variable v, String resultName|Static Method|Variable|-|
+|tan|Variable v, String resultName|Static Method|Variable|-|
+|tanh|Variable v, String resultName|Static Method|Variable|-|
+|atan|Variable v, String resultName|Static Method|Variable|-|
+|sqrt|Variable v, String resultName|Static Method|Variable|-|
+|pow|Variable v, float num, String resultName|Static Method|Variable|-|
 
 ### Random
 |Function Name |Inputs |Type |Return |Description |
