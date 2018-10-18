@@ -186,6 +186,35 @@ Process finished with exit code 0
 |transpose|Variable v, String resultName|Static Method|Variable|Transpose the input matrix. The inputs should be matrix (2d-arrays). The name of the output is the second input.|
 |transpose|Variable v, int[] t|Static Method|Variable|Transpose the input array by indicating the sequence of the axis. The inputs do not need to be a matrix (2d-arrays). The name of the output is "temp". For example, if the input variable has a shape of [2,4,5], and the second input is [1,0,2], then the output would be a variable with a shape of [4,2,5].|
 |transpose|Variable v, int[] t, String resultName|Static Method|Variable|Transpose the input array by indicating the sequence of the axis. The inputs do not need to be a matrix (2d-arrays). The name of the output is the third input. For example, if the input variable has a shape of [2,4,5], and the second input is [1,0,2], then the output would be a variable with a shape of [4,2,5].|
+|reshape|Variable v, int[] s|Static Method|Variable|Reshape the variable into the target shape. The name of the output is "temp".|
+|reshape|Variable v, int[] s, String resultName|Static Method|Variable|Reshape the variable into the target shape. The name of the output is the second input.|
+|repeat|Variable v, int objTime|Static Method|Variable|Repeat the variable n times. For example, let 'a' be a variable with a shape of [4,5], then the output of repeat(a, 3) is a variable with a shape of [3,4,5]. The name of the output is "temp".|
+|repeat|Variable v, int objTime, String resultName|Static Method|Variable|Repeat the variable n times. For example, let 'a' be a variable with a shape of [4,5], then the output of repeat(a, 3) is a variable with a shape of [3,4,5]. The name of the output is the third input.|
+|concatenate|ArrayList<Variable> av|Static Method|Variable|Concatenate the list of variables. The name of the output is "temp".|
+|concatenate|ArrayList<Variable> av|Static Method|Variable|Concatenate the list of variables. The name of the output is "temp".|
+
+|min|Variable v|Static Method|float|Return the minimum of all elements in the input variable.|
+|max|Variable v|Static Method|float|Return the maximum of all elements in the input variable.|
+|split|Variable array1d, int length, int stride|Static Method|Variable|Split by frames.|
+|split|Variable array1d, int length, int stride, String resultName|Static Method|Variable|Split by frames.|
+|doubleSplit|Variable array1d, int frameLength, int frameStride, int windowLength, int windowStride|Static Method|Variable|Split by frames and windows.|
+|doubleSplit|Variable array1d, int frameLength, int frameStride, int windowLength, int windowStride, String resultName|Static Method|Variable|Split by frames and windows.|
+|elementWiseAdd|Variable v1, Variable v2|Static Method|Variable|elementWiseAdd|
+|elementWiseAdd|Variable v1, float num|Static Method|Variable|elementWiseAdd|
+|elementWiseAdd|Variable v1, Variable v2, String resultName|Static Method|Variable|elementWiseAdd|
+|elementWiseAdd|Variable v1, float num, String resultName|Static Method|Variable|elementWiseAdd|
+|elementWiseSub|Variable v1, Variable v2|Static Method|Variable|elementWiseSub|
+|elementWiseSub|Variable v1, float num|Static Method|Variable|elementWiseSub|
+|elementWiseSub|Variable v1, Variable v2, String resultName|Static Method|Variable|elementWiseSub|
+|elementWiseSub|Variable v1, float num, String resultName|Static Method|Variable|elementWiseSub|
+|elementWiseMultiply|Variable v1, Variable v2|Static Method|Variable|elementWiseMultiply|
+|elementWiseMultiply|Variable v1, float num|Static Method|Variable|elementWiseMultiply|
+|elementWiseMultiply|Variable v1, Variable v2, String resultName|Static Method|Variable|elementWiseMultiply|
+|elementWiseMultiply|Variable v1, float num, String resultName|Static Method|Variable|elementWiseMultiply|
+|elementWiseDivide|Variable v1, Variable v2|Static Method|Variable|elementWiseDivide|
+|elementWiseDivide|Variable v1, float num|Static Method|Variable|elementWiseDivide|
+|elementWiseDivide|Variable v1, Variable v2, String resultName|Static Method|Variable|elementWiseDivide|
+|elementWiseDivide|Variable v1, float num, String resultName|Static Method|Variable|elementWiseDivide|
 
 ### NdArrayMath
 |Function Name |Inputs |Type |Return |Description |
