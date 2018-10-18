@@ -326,7 +326,7 @@ public class Variable {
         return v4;
     }
 
-    public String serialize() {
+    private String serialize() {
         int[] shape = getShape();
         StringBuilder sb = new StringBuilder();
         sb.append(dimension+"\n");
@@ -360,7 +360,7 @@ public class Variable {
         return sb.toString();
     }
 
-    public void deserializeAndLoad(String str) {
+    private void deserializeAndLoad(String str) {
         String[] lines = str.split("\n");
         if (lines[0].equals("1")) {
             String[] data = lines[1].substring(1,lines[1].length()-1).split(", ");
