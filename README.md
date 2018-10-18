@@ -100,7 +100,7 @@ Process finished with exit code 0
 ```
 
 3. Save and load
-"""
+```
 public static void main(String[] args) {
     Variable v21 = new Variable("v21", new int[]{3,3}, "zeros");
     Variable v22 = NdArrayUtils.elementWiseAdd(v21, 1);
@@ -130,9 +130,9 @@ public static void main(String[] args) {
     System.out.println(v4.equals(v4Load));
     System.out.println("================");
 }
-"""
+```
 Output
-"""
+```
 false
 true
 true
@@ -151,10 +151,10 @@ true
 ================
 
 Process finished with exit code 0
-"""
+```
 
 4. Random and sampling
-"""
+```
 public static void main(String[] args) {
     int[] theArray1 = Random.sampling(10, 20, false);
     int[] theArray2 = Random.sampling(10, 20, false);
@@ -214,9 +214,9 @@ public static void main(String[] args) {
     }
     System.out.println(sum);
 }
-"""
+```
 Output
-"""
+```
 [13, 14, 8, 4, 15, 11, 5, 17, 12, 10]
 [13, 1, 4, 9, 17, 5, 2, 19, 0, 8]
 [18, 19, 3, 6, 7, 11, 14, 13, 2, 1]
@@ -235,7 +235,7 @@ Output
 1000.0
 
 Process finished with exit code 0
-"""
+```
 
 ## API: tensorMing_Fundation
 
