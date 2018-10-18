@@ -33,7 +33,9 @@ Output:
 
 ## API
 
-### Variable
+### tensorMing_Fundation
+
+#### Variable
 |Function Name |Inputs |Type |Return |Description |
 |---           |---    |---  |---    |---         |
 |Variable|String str, int[] dimens, String initialization|Initialization|None|Initialize the variable with the variable name, dimension, and initializer. The initializer can be "zeros", "random" or "xavier" so far.|
@@ -68,11 +70,29 @@ Output:
 |toString|None|Method|String|Override the toString method.|
 
 
-### NdArrayUtils
+#### NdArrayUtils
 |Function Name |Inputs |Type |Return |Description |
 |---           |---    |---  |---    |---         |
 |equals|Variable v1, Variable v2|Static Method|Boolean|Return true if the values of the two variables are the same.|
 
-### NdArrayMath
+#### NdArrayMath
+|Function Name |Inputs |Type |Return |Description |
+|---           |---    |---  |---    |---         |
+
+#### Random
+|Function Name |Inputs |Type |Return |Description |
+|---           |---    |---  |---    |---         |
+
+### tensorMing_Learn
+
+#### Preprocessing
+|Function Name |Inputs |Type |Return |Description |
+|---           |---    |---  |---    |---         |
+
+#### ClusterDBScan
+|Function Name |Inputs |Type |Return |Description |
+|---           |---    |---  |---    |---         |
+
+#### ClusterKMeans
 |Function Name |Inputs |Type |Return |Description |
 |---           |---    |---  |---    |---         |
