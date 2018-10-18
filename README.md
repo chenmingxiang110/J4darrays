@@ -99,6 +99,144 @@ Output:
 Process finished with exit code 0
 ```
 
+3. Save and load
+"""
+public static void main(String[] args) {
+    Variable v21 = new Variable("v21", new int[]{3,3}, "zeros");
+    Variable v22 = NdArrayUtils.elementWiseAdd(v21, 1);
+    Variable v23 = NdArrayUtils.elementWiseAdd(v21, 1);
+    Variable v2r = new Variable("v2r", new int[]{3,3}, "random");
+    Variable v4 = new Variable("v4", new int[]{3,6,9,12}, "xavier");
+
+    System.out.println(v21.equals(v22));
+    System.out.println(v22.equals(v22));
+    System.out.println(v23.equals(v22));
+    System.out.println(v23.equals(v2r));
+    System.out.println(v23.equals(v4));
+    System.out.println("================");
+
+    v2r.save("tempFile.txt");
+    Variable v2rLoad = new Variable("temp", "tempFile.txt");
+    System.out.println(v2r);
+    System.out.println(v2rLoad);
+    System.out.println(v2r.equals(v2rLoad));
+
+    v2r.save("tempFile.txt");
+    v2rLoad = new Variable("temp", "tempFile.txt");
+    System.out.println(v2r.equals(v2rLoad));
+
+    v4.save("tempFile.txt");
+    Variable v4Load = new Variable("temp", "tempFile.txt");
+    System.out.println(v4.equals(v4Load));
+    System.out.println("================");
+}
+"""
+Output
+"""
+false
+true
+true
+false
+false
+================
+[ [0.51445496, 0.64803505, 0.81930506]
+  [0.52867293, 0.3433866, 0.8686877]
+  [0.31306472, 0.77175695, 0.8999964] ]
+[ [0.51445496, 0.64803505, 0.81930506]
+  [0.52867293, 0.3433866, 0.8686877]
+  [0.31306472, 0.77175695, 0.8999964] ]
+true
+true
+true
+================
+
+Process finished with exit code 0
+"""
+
+4. Random and sampling
+"""
+public static void main(String[] args) {
+    int[] theArray1 = Random.sampling(10, 20, false);
+    int[] theArray2 = Random.sampling(10, 20, false);
+    int[] theArray3 = Random.sampling(10, 20, false);
+    System.out.println(Arrays.toString(theArray1));
+    System.out.println(Arrays.toString(theArray2));
+    System.out.println(Arrays.toString(theArray3));
+    System.out.println("------------");
+    theArray1 = Random.sampling(10, 20, true);
+    theArray2 = Random.sampling(10, 20, true);
+    theArray3 = Random.sampling(10, 20, true);
+    System.out.println(Arrays.toString(theArray1));
+    System.out.println(Arrays.toString(theArray2));
+    System.out.println(Arrays.toString(theArray3));
+    System.out.println("------------");
+    theArray1 = Random.sampling(10, 10, false);
+    theArray2 = Random.sampling(10, 10, false);
+    theArray3 = Random.sampling(10, 10, false);
+    System.out.println(Arrays.toString(theArray1));
+    System.out.println(Arrays.toString(theArray2));
+    System.out.println(Arrays.toString(theArray3));
+
+    float sum = 0;
+    for (int i = 0 ; i<1000 ; i++) {
+        int r = Random.randInt(new float[]{(float)0.1, (float)0.9});
+        sum+=r;
+    }
+    System.out.println(sum);
+
+    sum = 0;
+    for (int i = 0 ; i<1000 ; i++) {
+        int[] r = Random.sampling(1, new float[]{(float)0.1, (float)0.9}, true);
+        sum+=r[0];
+    }
+    System.out.println(sum);
+
+    sum = 0;
+    for (int i = 0 ; i<1000 ; i++) {
+        int[] r = Random.sampling(2, new float[]{(float)0.1, (float)0.9}, true);
+        sum+=r[0];
+        sum+=r[1];
+    }
+    System.out.println(sum);
+
+    sum = 0;
+    for (int i = 0 ; i<1000 ; i++) {
+        int[] r = Random.sampling(1, new float[]{(float)0.1, (float)0.9}, false);
+        sum+=r[0];
+    }
+    System.out.println(sum);
+
+    sum = 0;
+    for (int i = 0 ; i<1000 ; i++) {
+        int[] r = Random.sampling(2, new float[]{(float)0.1, (float)0.9}, false);
+        sum+=r[0];
+        sum+=r[1];
+    }
+    System.out.println(sum);
+}
+"""
+Output
+"""
+[13, 14, 8, 4, 15, 11, 5, 17, 12, 10]
+[13, 1, 4, 9, 17, 5, 2, 19, 0, 8]
+[18, 19, 3, 6, 7, 11, 14, 13, 2, 1]
+------------
+[8, 8, 3, 4, 15, 7, 16, 5, 16, 8]
+[3, 3, 19, 18, 13, 10, 13, 11, 1, 14]
+[5, 13, 14, 6, 6, 4, 6, 9, 4, 13]
+------------
+[6, 9, 0, 5, 3, 8, 7, 1, 4, 2]
+[0, 5, 6, 3, 7, 4, 9, 8, 2, 1]
+[8, 5, 7, 2, 3, 1, 6, 4, 9, 0]
+904.0
+902.0
+1797.0
+887.0
+1000.0
+
+Process finished with exit code 0
+"""
+
 ## API: tensorMing_Fundation
 
 ### Variable
