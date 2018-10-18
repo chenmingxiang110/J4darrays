@@ -546,10 +546,10 @@ Smart Init Fit
 |oneHotArray|int index, int size|Static Method|float[]|Return an array where the result[index] is one, and the rest are zeros.|
 |oneHot|int index, int size|Static Method|Variable|Return a variable, and the value of which is an array where the result[index] is one, and the rest are zeros.The name of the variable is "temp".|
 |oneHot|int index, int size, String resultName|Static Method|Variable|Return a variable, and the value of which is an array where the result[index] is one, and the rest are zeros. The name of the variable is the third input.|
-|nHotArray|int[] indices, int size|Static Method|float[]|-|
+|nHotArray|int[] indices, int size|Static Method|float[]|Similar to the one hot array, return an array where the result[indices] are ones, and the rest are zeros.|
 |nHot|int[] indices, int size|Static Method|Variable|-|
 |nHot|int[] indices, int size, String resultName|Static Method|Variable|-|
-|normalize|Variable v|Static Method|Variable|-|
+|normalize|Variable v|Static Method|Variable|Normalize the values of the variable using (x-mean)/std.|
 |normalize|Variable v, String resultName|Static Method|Variable|-|
 |normalize|Variable v, float scale, float bias|Static Method|Variable|-|
 |normalize|Variable v, float scale, float bias, String resultName|Static Method|Variable|-|
