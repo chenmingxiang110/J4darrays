@@ -1,6 +1,6 @@
 ## Introduction
 
-Although this package is not camparable to numpy or tensorflow, but it is meant to make matrix manipulation and machine learning easier on Java. You can build ndArrays and caculations on them much easier than using the vanilla arrays like float[] or int[].
+Although this package is not camparable to numpy or tensorflow, but it is meant to make matrix manipulation and machine learning easier on Java. You can build ndArrays and caculations on them much easier than using the vanilla arrays.
 
 ## Quick Start
 
@@ -236,22 +236,161 @@ Output
 
 Process finished with exit code 0
 ```
+5. DBScan
+```
+public static void main(String[] args) {
+    ClusterDBScan cdb = new ClusterDBScan((float)1.5, 4);
+    ArrayList<Variable> av = new ArrayList<Variable>();
+    for (int i = 0 ; i<11 ; i++) {
+        av.add(new Variable(new float[]{0, i}));
+        av.add(new Variable(new float[]{1, i}));
+    }
+    av.add(new Variable(new float[]{9, 0}));
+    av.add(new Variable(new float[]{9, 1}));
+    av.add(new Variable(new float[]{10, 0}));
+    av.add(new Variable(new float[]{10, 1}));
+    av.add(new Variable(new float[]{10, 10}));
+
+    cdb.fit(av);
+    System.out.println(Arrays.toString(cdb.getLabels()));
+}
+```
+Output
+```
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 0]
+```
+6. KMeans
+```
+public static void main(String[] args) {
+    ArrayList<Variable> av = new ArrayList<Variable>();
+    av.add(new Variable(new float[]{9, 9}));
+    av.add(new Variable(new float[]{0, 0}));
+    av.add(new Variable(new float[]{0, 1}));
+    av.add(new Variable(new float[]{1, 0}));
+    av.add(new Variable(new float[]{1, 1}));
+    av.add(new Variable(new float[]{9, 0}));
+
+    ClusterKMeans ckm = new ClusterKMeans();
+
+    System.out.println("Random Initialization");
+    for (int i = 0 ; i<10 ; i++) {
+        ckm.initCentroids(av, 3);
+        System.out.println(ckm.getCentroids());
+    }
+
+    System.out.println("--------------------");
+
+    System.out.println("Plus Initialization");
+    for (int i = 0 ; i<10 ; i++) {
+        ckm.initCentroidsPlus(av, 3);
+        System.out.println(ckm.getCentroids());
+    }
+
+    av.add(new Variable(new float[]{2, 3}));
+    av.add(new Variable(new float[]{4, 5}));
+    av.add(new Variable(new float[]{3, 4}));
+    av.add(new Variable(new float[]{3, 3}));
+    av.add(new Variable(new float[]{6, 7}));
+    av.add(new Variable(new float[]{1, 4}));
+    av.add(new Variable(new float[]{(float)-2.2, 3}));
+    av.add(new Variable(new float[]{4, (float)-2.5}));
+    av.add(new Variable(new float[]{(float)2.3, -4}));
+    av.add(new Variable(new float[]{(float)-2.3, 3}));
+    av.add(new Variable(new float[]{-6, (float)2.7}));
+    av.add(new Variable(new float[]{1, (float)-2.4}));
+    av.add(new Variable(new float[]{-2, 3}));
+    av.add(new Variable(new float[]{4, -5}));
+    av.add(new Variable(new float[]{3, -4}));
+    av.add(new Variable(new float[]{-3, 3}));
+    av.add(new Variable(new float[]{-6, 7}));
+    av.add(new Variable(new float[]{1, -4}));
+
+    System.out.println("--------------------");
+
+    System.out.println("Normal Fit");
+    ckm.initCentroids(av, 5);
+    for (int i = 0 ; i<10 ; i++) {
+        System.out.println(Arrays.toString(ckm.getLabels()));
+        ckm.fit();
+    }
+    System.out.println(Arrays.toString(ckm.getLabels()));
+
+    System.out.println("Smart Init Fit");
+    ckm.initCentroidsPlus(av, 4);
+    for (int i = 0 ; i<10 ; i++) {
+        System.out.println(Arrays.toString(ckm.getLabels()));
+        ckm.fit();
+    }
+    System.out.println(Arrays.toString(ckm.getLabels()));
+}
+```
+Output
+```
+Random Initialization
+[[9.0, 0.0], [0.0, 0.0], [1.0, 1.0]]
+[[1.0, 1.0], [0.0, 0.0], [0.0, 1.0]]
+[[9.0, 9.0], [1.0, 1.0], [0.0, 1.0]]
+[[0.0, 0.0], [1.0, 0.0], [1.0, 1.0]]
+[[0.0, 0.0], [9.0, 0.0], [9.0, 9.0]]
+[[1.0, 0.0], [0.0, 1.0], [9.0, 0.0]]
+[[0.0, 1.0], [9.0, 9.0], [1.0, 0.0]]
+[[1.0, 1.0], [0.0, 1.0], [9.0, 9.0]]
+[[0.0, 0.0], [1.0, 0.0], [0.0, 1.0]]
+[[0.0, 1.0], [9.0, 0.0], [9.0, 9.0]]
+--------------------
+Plus Initialization
+[[9.0, 9.0], [9.0, 0.0], [0.0, 0.0]]
+[[9.0, 0.0], [9.0, 9.0], [0.0, 0.0]]
+[[9.0, 0.0], [9.0, 9.0], [0.0, 0.0]]
+[[9.0, 9.0], [9.0, 0.0], [1.0, 1.0]]
+[[9.0, 9.0], [9.0, 0.0], [1.0, 1.0]]
+[[9.0, 9.0], [9.0, 0.0], [0.0, 0.0]]
+[[9.0, 9.0], [1.0, 0.0], [9.0, 0.0]]
+[[9.0, 9.0], [1.0, 1.0], [9.0, 0.0]]
+[[9.0, 9.0], [9.0, 0.0], [1.0, 0.0]]
+[[9.0, 9.0], [9.0, 0.0], [1.0, 0.0]]
+--------------------
+Normal Fit
+[1, 0, 0, 2, 0, 4, 4, 4, 4, 4, 1, 4, 3, 2, 2, 3, 3, 2, 3, 2, 2, 3, 3, 2]
+[1, 0, 0, 0, 0, 4, 4, 4, 4, 4, 1, 4, 3, 2, 2, 3, 3, 2, 3, 2, 2, 3, 3, 2]
+[1, 0, 0, 0, 0, 4, 4, 4, 4, 4, 1, 4, 3, 2, 2, 3, 3, 2, 3, 2, 2, 3, 3, 2]
+[1, 0, 0, 0, 0, 4, 4, 4, 4, 4, 1, 4, 3, 2, 2, 3, 3, 2, 3, 2, 2, 3, 3, 2]
+[1, 0, 0, 0, 0, 4, 4, 4, 4, 4, 1, 4, 3, 2, 2, 3, 3, 2, 3, 2, 2, 3, 3, 2]
+[1, 0, 0, 0, 0, 4, 4, 4, 4, 4, 1, 4, 3, 2, 2, 3, 3, 2, 3, 2, 2, 3, 3, 2]
+[1, 0, 0, 0, 0, 4, 4, 4, 4, 4, 1, 4, 3, 2, 2, 3, 3, 2, 3, 2, 2, 3, 3, 2]
+[1, 0, 0, 0, 0, 4, 4, 4, 4, 4, 1, 4, 3, 2, 2, 3, 3, 2, 3, 2, 2, 3, 3, 2]
+[1, 0, 0, 0, 0, 4, 4, 4, 4, 4, 1, 4, 3, 2, 2, 3, 3, 2, 3, 2, 2, 3, 3, 2]
+[1, 0, 0, 0, 0, 4, 4, 4, 4, 4, 1, 4, 3, 2, 2, 3, 3, 2, 3, 2, 2, 3, 3, 2]
+[1, 0, 0, 0, 0, 4, 4, 4, 4, 4, 1, 4, 3, 2, 2, 3, 3, 2, 3, 2, 2, 3, 3, 2]
+Smart Init Fit
+[0, 1, 1, 1, 1, 3, 1, 0, 1, 1, 0, 1, 2, 1, 1, 2, 2, 1, 2, 1, 1, 2, 2, 1]
+[0, 1, 1, 1, 1, 3, 1, 0, 0, 1, 0, 1, 2, 1, 1, 2, 2, 1, 2, 1, 1, 2, 2, 1]
+[0, 1, 1, 1, 1, 3, 1, 0, 0, 1, 0, 2, 2, 1, 1, 2, 2, 1, 2, 1, 1, 2, 2, 1]
+[0, 1, 1, 1, 1, 3, 1, 0, 0, 0, 0, 2, 2, 1, 1, 2, 2, 1, 2, 1, 1, 2, 2, 1]
+[0, 1, 1, 1, 1, 3, 0, 0, 0, 0, 0, 2, 2, 1, 1, 2, 2, 1, 2, 1, 1, 2, 2, 1]
+[0, 1, 1, 1, 1, 3, 0, 0, 0, 0, 0, 0, 2, 1, 1, 2, 2, 1, 2, 1, 1, 2, 2, 1]
+[0, 1, 1, 1, 1, 3, 0, 0, 0, 0, 0, 0, 2, 1, 1, 2, 2, 1, 2, 1, 1, 2, 2, 1]
+[0, 1, 1, 1, 1, 3, 0, 0, 0, 0, 0, 0, 2, 1, 1, 2, 2, 1, 2, 1, 1, 2, 2, 1]
+[0, 1, 1, 1, 1, 3, 0, 0, 0, 0, 0, 0, 2, 1, 1, 2, 2, 1, 2, 1, 1, 2, 2, 1]
+[0, 1, 1, 1, 1, 3, 0, 0, 0, 0, 0, 0, 2, 1, 1, 2, 2, 1, 2, 1, 1, 2, 2, 1]
+[0, 1, 1, 1, 1, 3, 0, 0, 0, 0, 0, 0, 2, 1, 1, 2, 2, 1, 2, 1, 1, 2, 2, 1]
+```
 
 ## API: tensorMing_Fundation
 
 ### Variable
 |Function Name |Inputs |Type |Return |Description |
 |---           |---    |---  |---    |---         |
-|Variable|String str, int[] dimens, String initialization|Initialization|None|Initialize the variable with the variable name, dimension, and initializer. The initializer can be "zeros", "random" or "xavier" so far.|
-|Variable|String str, float[] values|Initialization|None|Initialize the variable with a name and values.|
-|Variable|String str, float[][] values|Initialization|None|Initialize the variable with a name and values.|
-|Variable|String str, float[][][] values|Initialization|None|Initialize the variable with a name and values.|
-|Variable|String str, float[][][][] values|Initialization|None|Initialize the variable with a name and values.|
-|Variable|float[] values|Initialization|None|Initialize the variable with values. The name is set as "temp".|
-|Variable|float[][] values|Initialization|None|Initialize the variable with values. The name is set as "temp".|
-|Variable|float[][][] values|Initialization|None|Initialize the variable with values. The name is set as "temp".|
-|Variable|float[][][][] values|Initialization|None|Initialize the variable with values. The name is set as "temp".|
-|Variable|String str, String filePath|Initialization|None|Initialize the variable by loading from a file.|
+|Variable|String str, int[] dimens, String initialization|Constructor|None|Initialize the variable with the variable name, dimension, and initializer. The initializer can be "zeros", "random" or "xavier" so far.|
+|Variable|String str, float[] values|Constructor|None|Initialize the variable with a name and values.|
+|Variable|String str, float[][] values|Constructor|None|Initialize the variable with a name and values.|
+|Variable|String str, float[][][] values|Constructor|None|Initialize the variable with a name and values.|
+|Variable|String str, float[][][][] values|Constructor|None|Initialize the variable with a name and values.|
+|Variable|float[] values|Constructor|None|Initialize the variable with values. The name is set as "temp".|
+|Variable|float[][] values|Constructor|None|Initialize the variable with values. The name is set as "temp".|
+|Variable|float[][][] values|Constructor|None|Initialize the variable with values. The name is set as "temp".|
+|Variable|float[][][][] values|Constructor|None|Initialize the variable with values. The name is set as "temp".|
+|Variable|String str, String filePath|Constructor|None|Initialize the variable by loading from a file.|
 |save|String filePath|Method|Boolean|Save the variable to a the filepath. Usually a txt file. Return true if the file is successfully saved.|
 |load|String filePath|Method|Boolean|Load the variable from a the filepath. Usually a txt file. Return true if the file is successfully loaded.|
 |equals|Variable v|Method|Boolean|Return true if the value and the shape of the given variable v is equal to the current one.|
@@ -408,7 +547,15 @@ Process finished with exit code 0
 ### ClusterDBScan
 |Function Name |Inputs |Type |Return |Description |
 |---           |---    |---  |---    |---         |
+|ClusterDBScan|float eps, int min_samples|Constructor|None|Initialize the class with eps and minimum number of samples.|
+|getLabels|None|Method|int[]|Return the labels.|
+|fit|ArrayList<Variable> av|Method|None|Fit (train) the data.|
 
 ### ClusterKMeans
 |Function Name |Inputs |Type |Return |Description |
 |---           |---    |---  |---    |---         |
+|ClusterKMeans|None|Constructor|None|-|
+|getLabels|None|Method|int[]|Return the labels.|
+|getCentroids|None|Method|ArrayList<Variable>|Return the centroids.|
+|initCentroids|ArrayList<Variable> av, int nClusters|Method|None|Initialize the centroids.|
+|initCentroidsPlus|ArrayList<Variable> av, int nClusters|Method|None|Initialize the centroids using KMeans++ method.|
