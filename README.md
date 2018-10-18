@@ -146,14 +146,14 @@ Process finished with exit code 0
 |zeros4d|int[][][][] shape|Static Method|float[][][][]|Return an all zero array. The shape of the array equals to the input array.|
 |random1d|int shape|Static Method|float[]|Return an array, where the values are picked randomly from the range between 0 and 1. The size of the array equals to the input integer.|
 |random1d|int[] shape|Static Method|float[]|Return an array, where the values are picked randomly from the range between 0 and 1. The shape of the array equals to the input array.|
-|random2d|int[][] shape|Static Method|float[][]|Return an array, where the values are picked randomly from the range between 0 and 1. The shape of the array equals to the input array.|
-|random3d|int[][][] shape|Static Method|float[][][]|Return an array, where the values are picked randomly from the range between 0 and 1. The shape of the array equals to the input array.|
-|random4d|int[][][][] shape|Static Method|float[][][][]|Return an array, where the values are picked randomly from the range between 0 and 1. The shape of the array equals to the input array.|
+|random2d|int[] shape|Static Method|float[][]|Return an array, where the values are picked randomly from the range between 0 and 1. The shape of the array equals to the input array.|
+|random3d|int[] shape|Static Method|float[][][]|Return an array, where the values are picked randomly from the range between 0 and 1. The shape of the array equals to the input array.|
+|random4d|int[] shape|Static Method|float[][][][]|Return an array, where the values are picked randomly from the range between 0 and 1. The shape of the array equals to the input array.|
 |xavier1d|int shape|Static Method|float[]|Return an array, where the values are initialized using xavier initialization method. The size of the array equals to the input integer.|
 |xavier1d|int[] shape|Static Method|float[]|Return an array, where the values are initialized using xavier initialization method. The shape of the array equals to the input array.|
-|xavier2d|int[][] shape|Static Method|float[][]|Return an array, where the values are initialized using xavier initialization method. The shape of the array equals to the input array.|
-|xavier3d|int[][][] shape|Static Method|float[][][]|Return an array, where the values are initialized using xavier initialization method. The shape of the array equals to the input array.|
-|xavier4d|int[][][][] shape|Static Method|float[][][][]|Return an array, where the values are initialized using xavier initialization method. The shape of the array equals to the input array.|
+|xavier2d|int[] shape|Static Method|float[][]|Return an array, where the values are initialized using xavier initialization method. The shape of the array equals to the input array.|
+|xavier3d|int[] shape|Static Method|float[][][]|Return an array, where the values are initialized using xavier initialization method. The shape of the array equals to the input array.|
+|xavier4d|int[] shape|Static Method|float[][][][]|Return an array, where the values are initialized using xavier initialization method. The shape of the array equals to the input array.|
 
 ### NdArrayUtils
 |Function Name |Inputs |Type |Return |Description |
@@ -183,7 +183,7 @@ Process finished with exit code 0
 |matmul|Variable v1, Variable v2|Static Method|Variable|Do matrix multiplication to the inputs. The inputs should be matrix (2d-arrays). The name of the output is "temp".|
 |matmul|Variable v1, Variable v2, String resultName|Static Method|Variable|Do matrix multiplication to the inputs. The inputs should be matrix (2d-arrays). The name of the output is the second input.|
 |transpose|Variable v|Static Method|Variable|Transpose the input matrix. The inputs should be matrix (2d-arrays). The name of the output is "temp".|
-|transpose|Variable v, String resultName|Transpose the input matrix. The inputs should be matrix (2d-arrays). The name of the output is the second input.|
+|transpose|Variable v, String resultName|Static Method|Variable|Transpose the input matrix. The inputs should be matrix (2d-arrays). The name of the output is the second input.|
 |transpose|Variable v, int[] t|Static Method|Variable|Transpose the input array by indicating the sequence of the axis. The inputs do not need to be a matrix (2d-arrays). The name of the output is "temp". For example, if the input variable has a shape of [2,4,5], and the second input is [1,0,2], then the output would be a variable with a shape of [4,2,5].|
 |transpose|Variable v, int[] t, String resultName|Static Method|Variable|Transpose the input array by indicating the sequence of the axis. The inputs do not need to be a matrix (2d-arrays). The name of the output is the third input. For example, if the input variable has a shape of [2,4,5], and the second input is [1,0,2], then the output would be a variable with a shape of [4,2,5].|
 
