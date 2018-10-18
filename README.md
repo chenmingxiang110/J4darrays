@@ -135,6 +135,25 @@ Process finished with exit code 0
 |get4d|None|Method|float[][][][]|Return a float array if the dimension is 4, or it will return null.|
 |toString|None|Method|String|Override the toString method.|
 
+### Initializer
+|Function Name |Inputs |Type |Return |Description |
+|---           |---    |---  |---    |---         |
+|arange|int shape|Static Method|float[]|Return a float[] where the first element is 0, and the last element is shape-1. The size of the array equals to the input integer.|
+|zeros1d|int shape|Static Method|float[]|Return an all zero array. The size of the array equals to the input integer.|
+|zeros1d|int[] shape|Static Method|float[]|Return an all zero array. The shape of the array equals to the input array.|
+|zeros2d|int[][] shape|Static Method|float[][]|Return an all zero array. The shape of the array equals to the input array.|
+|zeros3d|int[][][] shape|Static Method|float[][][]|Return an all zero array. The shape of the array equals to the input array.|
+|zeros4d|int[][][][] shape|Static Method|float[][][][]|Return an all zero array. The shape of the array equals to the input array.|
+|random1d|int shape|Static Method|float[]|Return an array, where the values are picked randomly from the range between 0 and 1. The size of the array equals to the input integer.|
+|random1d|int[] shape|Static Method|float[]|Return an array, where the values are picked randomly from the range between 0 and 1. The shape of the array equals to the input array.|
+|random2d|int[][] shape|Static Method|float[][]|Return an array, where the values are picked randomly from the range between 0 and 1. The shape of the array equals to the input array.|
+|random3d|int[][][] shape|Static Method|float[][][]|Return an array, where the values are picked randomly from the range between 0 and 1. The shape of the array equals to the input array.|
+|random4d|int[][][][] shape|Static Method|float[][][][]|Return an array, where the values are picked randomly from the range between 0 and 1. The shape of the array equals to the input array.|
+|xavier1d|int shape|Static Method|float[]|Return an array, where the values are initialized using xavier initialization method. The size of the array equals to the input integer.|
+|xavier1d|int[] shape|Static Method|float[]|Return an array, where the values are initialized using xavier initialization method. The shape of the array equals to the input array.|
+|xavier2d|int[][] shape|Static Method|float[][]|Return an array, where the values are initialized using xavier initialization method. The shape of the array equals to the input array.|
+|xavier3d|int[][][] shape|Static Method|float[][][]|Return an array, where the values are initialized using xavier initialization method. The shape of the array equals to the input array.|
+|xavier4d|int[][][][] shape|Static Method|float[][][][]|Return an array, where the values are initialized using xavier initialization method. The shape of the array equals to the input array.|
 
 ### NdArrayUtils
 |Function Name |Inputs |Type |Return |Description |
