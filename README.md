@@ -6,7 +6,7 @@ Although this package is not camparable to numpy or tensorflow, but it is meant 
 
 The following are some code snippets that you may be interested.
 
-Code:
+1. Math examples
 ```java
 public static void main(String[] args) {
     Variable v1 = new Variable("v1", new int[]{10}, "random");
@@ -29,6 +29,74 @@ Output:
 [0.52453554, 0.940351, 0.68725675, 0.23642759, 0.6777786, 0.6459202, 0.6751573, 0.96632546, 0.8320883, 0.5318355]
 [0.07570065, 0.7819157, 0.22308792, 0.0031245868, 0.21103352, 0.1740666, 0.20778777, 0.87195426, 0.47937745, 0.080003545]
 =============
+```
+
+2. Simple neural net:
+The following code shows how to build a series of fully connected layers to fit y = x^2.
+```java
+public static void main(String[] args) {
+    Variable x = new Variable("temp", new int[]{10}, "arange");
+    x = NdArrayUtils.repeat(x, new int[]{1,10});
+    x = NdArrayUtils.transpose(x);
+    Variable y = NdArrayUtils.elementWiseMultiply(x,x);
+
+    Variable m1 = new Variable("m1", new int[]{1,10}, "xavier");
+    Variable b1 = new Variable("b1", new int[]{10}, "xavier");
+    Variable m2 = new Variable("m2", new int[]{10,10}, "xavier");
+    Variable b2 = new Variable("b2", new int[]{10}, "xavier");
+    Variable m3 = new Variable("m3", new int[]{10,1}, "xavier");
+    Variable b3 = new Variable("b3", new int[]{1}, "xavier");
+
+    int NUM_STEP = 1000000;
+    float LEARNING_RATE = (float) 0.00001;
+    int PRINT_PERIOD = 100000;
+
+    for (int i = 0 ; i<NUM_STEP ; i++) {
+        Variable[] outputm1 = ActivationFcns.Relu(NdArrayUtils.matmul(x, m1));
+        Variable output1 = NdArrayUtils.elementWiseAdd(outputm1[0], NdArrayUtils.repeat(b1, new int[]{10,10}));
+        Variable[] outputm2 = ActivationFcns.Sigmoid(NdArrayUtils.matmul(output1, m2));
+        Variable output2 = NdArrayUtils.elementWiseAdd(outputm2[0], NdArrayUtils.repeat(b2, new int[]{10,10}));
+        Variable output3 = NdArrayUtils.elementWiseAdd(NdArrayUtils.matmul(output2, m3), NdArrayUtils.repeat(b3, new int[]{10,1}));
+
+        Variable minus = NdArrayUtils.elementWiseSub(output3, y);
+        Variable loss = NdArrayUtils.elementWiseMultiply(minus, minus);
+        if (i/PRINT_PERIOD*PRINT_PERIOD==i) System.out.println(NdArrayUtils.mean(loss));
+
+        Variable gh3 = NdArrayUtils.elementWiseSub(output3, y);
+        Variable gb3 = NdArrayUtils.elementWiseMultiply(NdArrayUtils.meanDim1(gh3), LEARNING_RATE);
+        Variable gm3 = NdArrayUtils.elementWiseMultiply(NdArrayUtils.matmul(NdArrayUtils.transpose(output2), gh3), LEARNING_RATE);
+
+        Variable gh2 = NdArrayUtils.elementWiseMultiply(NdArrayUtils.matmul(gh3, NdArrayUtils.transpose(m3)), outputm2[1]);
+        Variable gb2 = NdArrayUtils.elementWiseMultiply(NdArrayUtils.meanDim1(gh2), LEARNING_RATE);
+        Variable gm2 = NdArrayUtils.elementWiseMultiply(NdArrayUtils.matmul(NdArrayUtils.transpose(output1), gh2), LEARNING_RATE);
+
+        Variable gh1 = NdArrayUtils.elementWiseMultiply(NdArrayUtils.matmul(gh2, NdArrayUtils.transpose(m2)), outputm1[1]);
+        Variable gb1 = NdArrayUtils.elementWiseMultiply(NdArrayUtils.meanDim1(gh1), LEARNING_RATE);
+        Variable gm1 = NdArrayUtils.elementWiseMultiply(NdArrayUtils.matmul(NdArrayUtils.transpose(x), gh1), LEARNING_RATE);
+
+        m1 = NdArrayUtils.elementWiseSub(m1, gm1);
+        b1 = NdArrayUtils.elementWiseSub(b1, gb1);
+        m2 = NdArrayUtils.elementWiseSub(m2, gm2);
+        b2 = NdArrayUtils.elementWiseSub(b2, gb2);
+        m3 = NdArrayUtils.elementWiseSub(m3, gm3);
+        b3 = NdArrayUtils.elementWiseSub(b3, gb3);
+    }
+}
+```
+Output:
+```
+1472.5006
+0.4221182
+0.018670654
+0.002476206
+0.0015158897
+0.001203638
+0.0010536256
+9.954824E-4
+9.7468635E-4
+9.589021E-4
+
+Process finished with exit code 0
 ```
 
 ## API: tensorMing_Fundation
