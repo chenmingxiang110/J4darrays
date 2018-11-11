@@ -116,6 +116,40 @@ public class Variable {
         v4 = values;
     }
 
+    public Variable(ArrayList<Variable> values) {
+        if (values.size()<1) {
+            throw new IllegalArgumentException("Empty inputs.");
+        }
+        if (values.get(0).getDimension()>=4) {
+            throw new IllegalArgumentException("Dimension too high.");
+        }
+        dimension = values.get(0).getDimension()+1;
+        int[] shape = values.get(0).getShape();
+
+        for (int i = 0 ; i<values.size() ; i++) {
+            if (!values.get(i).getShape().equals(shape)) {
+                throw new IllegalArgumentException("Dimensions not identical.");
+            }
+        }
+
+        if (dimension == 2) {
+            v2 = new float[values.size()][shape[0]];
+            for (int i = 0 ; i<values.size() ; i++) {
+                v2[i] = values.get(i).get1d();
+            }
+        } else if (dimension == 3) {
+            v3 = new float[values.size()][shape[0]][shape[1]];
+            for (int i = 0 ; i<values.size() ; i++) {
+                v3[i] = values.get(i).get2d();
+            }
+        } else {
+            v4 = new float[values.size()][shape[0]][shape[1]][shape[2]];
+            for (int i = 0 ; i<values.size() ; i++) {
+                v4[i] = values.get(i).get3d();
+            }
+        }
+    }
+
     public Variable(String str, String filePath) {
         name = str;
         load(filePath);
