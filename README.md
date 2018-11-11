@@ -614,3 +614,9 @@ Output
 |getCentroids|None|Method|ArrayList<Variable>|Return the centroids.|
 |initCentroids|ArrayList<Variable> av, int nClusters|Method|None|Initialize the centroids.|
 |initCentroidsPlus|ArrayList<Variable> av, int nClusters|Method|None|Initialize the centroids using KMeans++ method.|
+
+### NeighboursKNNClassifier
+|Function Name |Inputs |Type |Return |Description |
+|---           |---    |---  |---    |---         |
+|NeighboursKNNClassifier|int kValue, boolean mode|Constructor|None|Initialize the class with k and distance mechanism. If mode is true, then use cosine similarity, else it would use the eular distance|
+|predict|Variable input, ArrayList<Variable> xs, ArrayList<Integer> ys, int maxLabel|Method|float[]|Return the probabilities of labels.|
