@@ -117,6 +117,7 @@ public class Variable {
     }
 
     public Variable(ArrayList<Variable> values) {
+        name = "temp";
         if (values.size()<1) {
             throw new IllegalArgumentException("Empty inputs.");
         }
@@ -127,7 +128,7 @@ public class Variable {
         int[] shape = values.get(0).getShape();
 
         for (int i = 0 ; i<values.size() ; i++) {
-            if (!values.get(i).getShape().equals(shape)) {
+            if (!Arrays.equals(values.get(i).getShape(),(shape))) {
                 throw new IllegalArgumentException("Dimensions not identical.");
             }
         }

@@ -791,8 +791,14 @@ public class NdArrayUtils {
         }
     }
 
-    public static Variable repeat(Variable v, int[] objShape) {
+    public static Variable repeat(Variable v, int objTime) {
+        if (objTime<=0) throw new IllegalArgumentException("Cannot repeat n times if n is smaller than 1.");
         int[] shape = v.getShape();
+        int[] objShape = new int[shape.length+1];
+        objShape[0] = objTime;
+        for (int i = 0 ; i<shape.length ; i++) {
+            objShape[i+1] = shape[i];
+        }
         if (!(objShape.length <= 4 && shape.length == (objShape.length-1) && Arrays.equals(shape, Arrays.copyOfRange(objShape, 1, objShape.length)))) {
             throw new IllegalArgumentException("Shape does not match when doing repeat on "+v.getName()+
                     ".\nTarget shape is "+ Arrays.toString(objShape)+", current shape is "+Arrays.toString(shape)+".");
@@ -825,8 +831,11 @@ public class NdArrayUtils {
         return variable;
     }
 
-    public static Variable repeat(Variable v, int[] objShape, String resultName) {
+    public static Variable repeat(Variable v, int objTime, String resultName) {
+        if (objTime<=0) throw new IllegalArgumentException("Cannot repeat n times if n is smaller than 1.");
         int[] shape = v.getShape();
+        int[] objShape = new int[shape.length+1];
+        objShape[0] = objTime;
         if (!(objShape.length <= 4 && shape.length == (objShape.length-1) && Arrays.equals(shape, Arrays.copyOfRange(objShape, 1, objShape.length)))) {
             throw new IllegalArgumentException("Shape does not match when doing repeat on "+v.getName()+
                     ".\nTarget shape is "+ Arrays.toString(objShape)+", current shape is "+Arrays.toString(shape)+".");
@@ -927,6 +936,48 @@ public class NdArrayUtils {
         } else {
             throw new IllegalArgumentException("Illegal shape.");
         }
+    }
+
+    public static float min(float[] v) {
+        int index = argmin(v);
+        return v[index];
+    }
+
+    public static float max(float[] v) {
+        int index = argmax(v);
+        return v[index];
+    }
+
+    public static int argmin(float[] v) {
+        if (v.length == 0) {
+            throw new IllegalArgumentException("Empty input.");
+        }
+        if (v.length == 1) return 0;
+        int index = 0;
+        float value = v[index];
+        for (int i = 1 ; i<v.length ; i++) {
+            if (v[i]<value) {
+                index = i;
+                value = v[i];
+            }
+        }
+        return index;
+    }
+
+    public static int argmax(float[] v) {
+        if (v.length == 0) {
+            throw new IllegalArgumentException("Empty input.");
+        }
+        if (v.length == 1) return 0;
+        int index = 0;
+        float value = v[index];
+        for (int i = 1 ; i<v.length ; i++) {
+            if (v[i]>value) {
+                index = i;
+                value = v[i];
+            }
+        }
+        return index;
     }
 
     public static float min(Variable v) {
