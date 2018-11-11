@@ -390,6 +390,7 @@ Smart Init Fit
 |Variable|float[][] values|Constructor|None|Initialize the variable with values. The name is set as "temp".|
 |Variable|float[][][] values|Constructor|None|Initialize the variable with values. The name is set as "temp".|
 |Variable|float[][][][] values|Constructor|None|Initialize the variable with values. The name is set as "temp".|
+|Variable|Variable(ArrayList<Variable> values)|Constructor|None|Initialize the variable with values. The name is set as "temp". If the shapes of the variables in the list are [[3,3],[3,3]], then the output variable shape would be [2,3,3]|
 |Variable|String str, String filePath|Constructor|None|Initialize the variable by loading from a file.|
 |save|String filePath|Method|Boolean|Save the variable to a the filepath. Usually a txt file. Return true if the file is successfully saved.|
 |load|String filePath|Method|Boolean|Load the variable from a the filepath. Usually a txt file. Return true if the file is successfully loaded.|
