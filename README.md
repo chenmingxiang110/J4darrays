@@ -375,6 +375,40 @@ Smart Init Fit
 [0, 1, 1, 1, 1, 3, 0, 0, 0, 0, 0, 0, 2, 1, 1, 2, 2, 1, 2, 1, 1, 2, 2, 1]
 [0, 1, 1, 1, 1, 3, 0, 0, 0, 0, 0, 0, 2, 1, 1, 2, 2, 1, 2, 1, 1, 2, 2, 1]
 ```
+7. KNN
+```
+public static void main(String[] args) {
+    ArrayList<Variable> av = new ArrayList<>();
+    av.add(new Variable(new float[]{(float)1.1, (float)1.4}));
+    av.add(new Variable(new float[]{(float)1.3, (float)1.4}));
+    av.add(new Variable(new float[]{(float)1.2, (float)1.4}));
+    av.add(new Variable(new float[]{(float)1.4, (float)1.2}));
+    av.add(new Variable(new float[]{(float)4.3, (float)3.5}));
+    av.add(new Variable(new float[]{(float)2.1, (float)2.3}));
+    av.add(new Variable(new float[]{(float)2.5, (float)2.4}));
+    av.add(new Variable(new float[]{(float)2.1, (float)2.4}));
+
+    ArrayList<Integer> ai = new ArrayList<>();
+    ai.add(0);
+    ai.add(0);
+    ai.add(0);
+    ai.add(0);
+    ai.add(1);
+    ai.add(2);
+    ai.add(2);
+    ai.add(2);
+
+    Variable v = new Variable(new float[]{(float)1.1, (float)1.1});
+
+    NeighboursKNNClassifier knn = new NeighboursKNNClassifier(4, true);
+    float[] result = knn.predict(v, av, ai, 3);
+    System.out.println(Arrays.toString(result));
+}
+```
+Output
+```
+[0.25, 0, 0.75]
+```
 
 ## API: tensorMing_Fundation
 
