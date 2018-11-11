@@ -472,6 +472,10 @@ Smart Init Fit
 |concatenate|ArrayList<Variable> av|Static Method|Variable|Concatenate the list of variables. The name of the output is "temp".|
 |min|Variable v|Static Method|float|Return the minimum of all elements in the input variable.|
 |max|Variable v|Static Method|float|Return the maximum of all elements in the input variable.|
+|min|float[] v|Static Method|float|Return the minimum of all elements in the input array.|
+|max|float[] v|Static Method|float|Return the maximum of all elements in the input array.|
+|argmin|float[] v|Static Method|int|Return the index of the minimum element in the input array.|
+|argmax|float[] v|Static Method|int|Return the index of the maximum element in the input array.|
 |split|Variable array1d, int length, int stride|Static Method|Variable|Split by frames.|
 |split|Variable array1d, int length, int stride, String resultName|Static Method|Variable|Split by frames.|
 |doubleSplit|Variable array1d, int frameLength, int frameStride, int windowLength, int windowStride|Static Method|Variable|Split by frames and windows.|
