@@ -7,6 +7,47 @@ public class NdArrayUtils {
 
     public NdArrayUtils() {}
 
+    // input = 2,3, output = [2,0,1]
+    // input = 4,7, output = [4,0,1,2,3,5,6]
+    // 在 mean(Variable v, int axis) 和 sum(Variable v, int axis) 中用到
+    private static int[] axis2transposition(int axis, int shape) {
+        if (axis>=shape || axis<0) throw new IllegalArgumentException("Invalid axis.");
+        if (shape<=0) throw new IllegalArgumentException("Invalid shape.");
+        int[] transposition = new int[shape];
+        transposition[0] = axis;
+        int pointer = 1;
+        for (int i = 0 ; i<shape ; i++) {
+            if (i!=axis) {
+                transposition[pointer] = i;
+                pointer++;
+            }
+        }
+        return transposition;
+    }
+
+    private static float multiplyAndAdd(float[] a, float[] b) {
+        if (a.length != b.length) {
+            throw new IllegalArgumentException("The shape of a and b are not equal, cannot do multiplyAndAdd.");
+        }
+        float result = (float) 0.0;
+        for (int i = 0 ; i<a.length ; i++) {
+            result+=a[i]*b[i];
+        }
+        return result;
+    }
+
+    public static float[] linspace(float start, float end, int num) {
+        if (num<2) {
+            throw new IllegalArgumentException("Number of points must be larger than 2.");
+        }
+        float stride = (end-start)/((float)(num-1));
+        float[] result = new float[num];
+        for (int i = 0 ; i<num ; i++) {
+            result[i] = start+i*stride;
+        }
+        return result;
+    }
+
     public static boolean equals(Variable v1, Variable v2) {
         int[] vShape = v2.getShape();
         int[] mShape = v1.getShape();
@@ -124,6 +165,58 @@ public class NdArrayUtils {
             summation+=values[i];
         }
         return summation;
+    }
+
+    // 沿着第一维计算加和。例如输入的 array 其 shape 为 [3,4,5]，输出则为 [4,5]。计算其他维度需先 transpose 再计算。
+    public static Variable sumDim1(Variable v) {
+        int[] shape = v.getShape();
+        if (shape.length<2) throw new IllegalArgumentException("Please use mean() instead.");
+        Variable variable = new Variable("temp", Arrays.copyOfRange(shape, 1, shape.length), "zeros");
+        if (shape.length == 2) {
+            float[][] values = v.get2d();
+            float[] result = new float[shape[1]];
+            for (int i = 0 ; i<shape[0] ; i++) {
+                for (int j = 0 ; j<shape[1] ; j++) {
+                    result[j]+=values[i][j];
+                }
+            }
+            variable.importValues(result);
+            return variable;
+        } else if (shape.length == 3) {
+            float[][][] values = v.get3d();
+            float[][] result = new float[shape[1]][shape[2]];
+            for (int i = 0 ; i<shape[0] ; i++) {
+                for (int j = 0 ; j<shape[1] ; j++) {
+                    for (int k = 0 ; k<shape[2] ; k++) {
+                        result[j][k]+=values[i][j][k];
+                    }
+                }
+            }
+            variable.importValues(result);
+            return variable;
+        } else if (shape.length == 4) {
+            float[][][][] values = v.get4d();
+            float[][][] result = new float[shape[1]][shape[2]][shape[3]];
+            for (int i = 0 ; i<shape[0] ; i++) {
+                for (int j = 0 ; j<shape[1] ; j++) {
+                    for (int k = 0 ; k<shape[2] ; k++) {
+                        for (int l = 0 ; l<shape[3] ; l++) {
+                            result[j][k][l]+=values[i][j][k][l];
+                        }
+                    }
+                }
+            }
+            variable.importValues(result);
+            return variable;
+        } else {
+            throw new IllegalArgumentException("Illegal shape.");
+        }
+    }
+
+    // 计算沿着某一方向的加和，输入可以是 1d-4d array。
+    public static Variable sum(Variable v, int axis) {
+        Variable v_t = transpose(v, axis2transposition(axis, v.getDimension()));
+        return sumDim1(v_t);
     }
 
     // 计算连乘，输入可以是 1d-4d array。
@@ -262,23 +355,6 @@ public class NdArrayUtils {
         }
     }
 
-    // input = 2,3, output = [2,0,1]
-    // input = 4,7, output = [4,0,1,2,3,5,6]
-    private static int[] axis2transposition(int axis, int shape) {
-        if (axis>=shape || axis<0) throw new IllegalArgumentException("Invalid axis.");
-        if (shape<=0) throw new IllegalArgumentException("Invalid shape.");
-        int[] transposition = new int[shape];
-        transposition[0] = axis;
-        int pointer = 1;
-        for (int i = 0 ; i<shape ; i++) {
-            if (i!=axis) {
-                transposition[pointer] = i;
-                pointer++;
-            }
-        }
-        return transposition;
-    }
-
     public static Variable mean(Variable v, int axis) {
         int[] transposition = axis2transposition(axis, v.getDimension());
         Variable variable = meanDim1(transpose(v, transposition));
@@ -367,17 +443,6 @@ public class NdArrayUtils {
         }
     }
 
-    private static float multiplyAndAdd(float[] a, float[] b) {
-        if (a.length != b.length) {
-            throw new IllegalArgumentException("The shape of a and b are not equal, cannot do multiplyAndAdd.");
-        }
-        float result = (float) 0.0;
-        for (int i = 0 ; i<a.length ; i++) {
-            result+=a[i]*b[i];
-        }
-        return result;
-    }
-
     public static Variable matmul(Variable v1, Variable v2) {
         if (!(v1.getDimension() == 2 && v2.getDimension() == 2 && v1.getShape()[1] == v2.getShape()[0])) {
             throw new IllegalArgumentException("Cannot do matrix multiplication on "+v1.getName()+" and "+v2.getName()+".");
@@ -420,6 +485,14 @@ public class NdArrayUtils {
         Variable variable = new Variable(resultName, new int[]{result.length,result[0].length}, "zeros");
         variable.importValues(result);
         return variable;
+    }
+
+    public static Variable dot(Variable v1, Variable v2) {
+        return matmul(v1, v2);
+    }
+
+    public static Variable dot(Variable v1, Variable v2, String resultName) {
+        return matmul(v1, v2, resultName);
     }
 
     public static Variable transpose(Variable v) {

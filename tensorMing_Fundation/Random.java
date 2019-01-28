@@ -27,7 +27,6 @@ public class Random {
         }
         return probs.length-1;
     }
-
     // Optimized quick method only for private use.
     private static int randInt(float[] probs, float[] accumulations) {
         if (probs.length<=0) throw new IllegalArgumentException("Probability size must be greater than zero.");
