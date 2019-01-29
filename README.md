@@ -500,7 +500,21 @@ Output
 |flatten|float[][][][] inputValues|Static Method|float[]|Reshape the input array into an 1d-array.|
 |flatten|Variable v|Static Method|Variable|Reshape the input variable. The shape of the output equals to int[]{N}, where N equals to the number of elements in the input variable. The name of the output variable is "temp".|
 |flatten|Variable v, String resultName|Static Method|Variable|Reshape the input variable. The shape of the output equals to int[]{N}, where N equals to the number of elements in the input variable. The name of the output variable is the second input.|
+|pad|int[] data, int objLength, int element|Static Method|int[]|Pad to 'objLength' with 'element'.|
+|pad|int[] data, int objLength|Static Method|int[]|Pad to 'objLength' with 0s.|
+|pad|float[] data, int objLength, int element|Static Method|float[]|Pad to 'objLength' with 'element'.|
+|pad|float[] data, int objLength|Static Method|float[]|Pad to 'objLength' with 0s.|
+|pad|double[] data, int objLength, int element|Static Method|double[]|Pad to 'objLength' with 'element'.|
+|pad|double[] data, int objLength|Static Method|double[]|Pad to 'objLength' with 0s.|
+|pad|boolean[] data, int objLength, int element|Static Method|boolean[]|Pad to 'objLength' with 'element'.|
+|pad|boolean[] data, int objLength|Static Method|boolean[]|Pad to 'objLength' with 0s.|
+|pad|char[] data, int objLength, int element|Static Method|char[]|Pad to 'objLength' with 'element'.|
+|pad|char[] data, int objLength|Static Method|char[]|Pad to 'objLength' with 0s.|
+|pad|Variable v, int objLength, int element|Static Method|Variable|Pad to 'objLength' with 'element'. The input variable must be 1-dimension.|
+|pad|Variable v, int objLength|Static Method|Variable|Pad to 'objLength' with 0s. The input variable must be 1-dimension.|
 |sum|Variable v|Static Method|float|Return the sum of all the elements in the input variable.|
+|sum|Variable v, int axis|Static Method|float|Return the sum of all the elements along the axis.|
+|linspace|float start, float end, int num|Static Method|float[]|Return evenly spaced numbers over a specified interval.|
 |multiplication|Variable v|Static Method|float|Return the result of multiplying all the elements in the input variable.|
 |mean|float[] inputValues|Static Method|float|Return the mean of all elements in the input array.|
 |mean|float[][] inputValues|Static Method|float|Return the mean of all elements in the input array.|
