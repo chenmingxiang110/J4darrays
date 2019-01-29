@@ -435,6 +435,44 @@ Output
 
 ## API: tensorMing_Fundation
 
+### Complex (Class for complex numbers)
+From: https://introcs.cs.princeton.edu/java/32class/Complex.java.html
+Modified by: chenmingxiang110
+|Function Name |Inputs |Type |Return |Description |
+|---           |---    |---  |---    |---         |
+|Complex|double real, double imag|Constructor|None|Create a new object with the given real and imaginary parts.|
+|toString|None|Method|String|Return a string representation of the invoking Complex object.|
+|abs|None|Method|double|Return abs/modulus/magnitude.|
+|phase|None|Method|double|Return angle/phase/argument, normalized to be between -pi and pi.|
+|plus|Complex b|Method|Complex|-|
+|minus|Complex b|Method|Complex|-|
+|times|Complex b|Method|Complex|-|
+|divides|Complex b|Method|Complex|-|
+|plus|Complex a, Complex b|Static Method|Complex|-|
+|minus|Complex a, Complex b|Static Method|Complex|-|
+|times|Complex a, Complex b|Static Method|Complex|-|
+|divides|Complex a, Complex b|Static Method|Complex|-|
+|scale|double alpha|Method|Complex|Return a new object whose value is (this * alpha).|
+|conjugate|None|Method|Complex|Return a new Complex object whose value is the conjugate of this (re, -im).|
+|reciprocal|None|Method|Complex|Return a new Complex object whose value is the reciprocal of this.(re / (re^2+im^2), -im / (re^2+im^2))|
+|re|None|Method|double|Return the real part.|
+|im|None|Method|double|Return the imaginary part.|
+|exp|None|Method|Complex|-|
+|sin|None|Method|Complex|-|
+|cos|None|Method|Complex|-|
+|tan|None|Method|Complex|-|
+|squareSum|Complex[] a|Static Method|double|Return real^2 + imag^2.|
+|modularL|Complex[] a|Static Method|double|Return sqrt(real^2 + imag^2).|
+|realArray|Complex[] a|Static Method|double[]|Return the real parts of the input complex array.|
+|imagArray|Complex[] a|Static Method|double[]|Return the imaginary parts of the input complex array.|
+|squareSumArray|Complex[] a|Static Method|double[]|Return the square sums of the input complex array.|
+|modularLengthArray|Complex[] a|Static Method|double[]|Return the modular lengths of the input complex array.|
+|fromArray|int[] a|Static Method|Complex[]|Construct an array of complex numbers from an integer array..|
+|fromArray|float[] a|Static Method|Complex[]|Construct an array of complex numbers from an float array..|
+|fromArray|double[] a|Static Method|Complex[]|Construct an array of complex numbers from an double array..|
+|equals|Object x|Method|boolean|-|
+|hashCode|None|Method|int|-|
+
 ### Variable
 |Function Name |Inputs |Type |Return |Description |
 |---           |---    |---  |---    |---         |
@@ -657,3 +695,14 @@ Output
 |---           |---    |---  |---    |---         |
 |NeighboursKNNClassifier|int kValue, boolean mode|Constructor|None|Initialize the class with k and distance mechanism. If mode is true, then use cosine similarity, else it would use the eular distance|
 |predict|Variable input, ArrayList<Variable> xs, ArrayList<Integer> ys, int maxLabel|Method|float[]|Return the probabilities of labels.|
+
+## API: tensorMing_Signal
+Package for signal processing.
+
+### FFT
+
+### Filters
+
+### WaveFileReader
+
+### Window
