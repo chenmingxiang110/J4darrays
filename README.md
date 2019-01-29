@@ -602,7 +602,7 @@ Output
 |sqrt|Variable v, String resultName|Static Method|Variable|-|
 |pow|Variable v, float num, String resultName|Static Method|Variable|-|
 |modularL|Variable v|Static Method|float|Modular length.|
-|distance|Variable v1, Variable v2|Static Method|float|-|
+|distance|Variable v1, Variable v2|Static Method|float|Euclidean distance.|
 |cosineSim|Variable v1, Variable v2|Static Method|float|Cosine simlarity.|
 
 ### Random
