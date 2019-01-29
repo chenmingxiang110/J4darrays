@@ -409,6 +409,29 @@ Output
 ```
 [0.25, 0, 0.75]
 ```
+8. Signal process
+```
+public static void main(String[] args) {
+    WaveFileReader wfr = new WaveFileReader("audio_test.wav");
+    float[] data = Filters.signalNormalize(wfr.getData()[0]);
+    int rate = (int)wfr.getSampleRate();
+    System.out.println(data.length);
+    System.out.println(rate);
+
+    float[][] fb = Filters.fbank(data, rate);
+    System.out.print(fb.length);
+    System.out.print(", ");
+    System.out.println(fb[0].length);
+    System.out.println(Arrays.toString(fb[333]));
+}
+```
+Output
+```
+53584
+16000
+334, 40
+[1.8962096E-7, 3.4185337E-7, 9.402056E-7, 1.6399817E-6, 1.0302442E-6, 1.09921196E-7, 5.8180127E-8, 7.9379156E-8, 1.0080868E-7, 4.353177E-7, 6.6304665E-8, 1.0899443E-7, 1.8622359E-7, 1.5437374E-7, 1.3609801E-7, 3.939218E-7, 3.2756626E-7, 3.0788763E-7, 6.7817393E-7, 8.273825E-7, 2.1179642E-7, 2.2922988E-7, 4.5069845E-7, 7.3705854E-7, 8.046142E-7, 1.0174477E-6, 8.1260987E-7, 8.6839526E-7, 1.4368326E-6, 1.2279133E-6, 3.4668137E-6, 3.7141112E-6, 2.9962564E-6, 5.8050646E-6, 3.4515017E-6, 5.012597E-6, 4.8750767E-6, 4.9365394E-6, 5.2051E-6, 6.3636767E-6]
+```
 
 ## API: tensorMing_Fundation
 
