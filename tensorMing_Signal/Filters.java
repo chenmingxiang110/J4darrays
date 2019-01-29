@@ -6,6 +6,17 @@ import java.util.Arrays;
 
 public class Filters {
 
+    private static float[] _signalPad(float[] signal, int winlen, int winstep) {
+        if (signal.length<winlen) {
+            return NdArrayUtils.pad(signal, winlen);
+        }
+        if ((signal.length-winlen)%winstep == 0) {
+            return signal;
+        }
+        int numPad = winstep-((signal.length-winlen)%winstep);
+        return NdArrayUtils.pad(signal, signal.length+numPad);
+    }
+
     // Frame a signal into overlapping frames.
     public static float[][] frameSeg(float[] signal, int frame_len, int frame_step, String windowFunc) {
         if (signal.length<1) {
@@ -41,6 +52,48 @@ public class Filters {
         return result;
     }
 
+    public static float[] zeroPad(float[] signal, int objLength) {
+        float[] result = new float[objLength];
+        for (int i = 0 ; i<signal.length ; i++) result[i] = signal[i];
+        return result;
+    }
+
+    public static float[] signalNormalize(int[] signal) {
+        float max = signal[0];
+        for (int i : signal) {
+            if (i>max) max = i;
+        }
+        float[] result = new float[signal.length];
+        for (int i = 0 ; i<signal.length ; i++) {
+            result[i] = ((float) signal[i])/(max);
+        }
+        return result;
+    }
+
+    public static float[] signalNormalize(float[] signal) {
+        float max = signal[0];
+        for (float i : signal) {
+            if (i>max) max = i;
+        }
+        float[] result = new float[signal.length];
+        for (int i = 0 ; i<signal.length ; i++) {
+            result[i] = ((float) signal[i])/(max);
+        }
+        return result;
+    }
+
+    public static float[] signalNormalize(double[] signal) {
+        double max = signal[0];
+        for (double i : signal) {
+            if (i>max) max = i;
+        }
+        float[] result = new float[signal.length];
+        for (int i = 0 ; i<signal.length ; i++) {
+            result[i] = ((float) signal[i])/((float)max);
+        }
+        return result;
+    }
+
     public static float[] preemphasis(float[] signal, float preemph) {
         if (signal.length<1) {
             throw new IllegalArgumentException("Empty signal.");
@@ -50,12 +103,6 @@ public class Filters {
         for (int i = 1 ; i<signal.length ; i++) {
             result[i] = signal[i] - signal[i-1] * preemph;
         }
-        return result;
-    }
-
-    public static float[] zeroPad(float[] signal, int objLength) {
-        float[] result = new float[objLength];
-        for (int i = 0 ; i<signal.length ; i++) result[i] = signal[i];
         return result;
     }
 
@@ -69,7 +116,7 @@ public class Filters {
             } else {
                 input = Arrays.copyOfRange(frames[i],0,nfft);
             }
-            Complex[] inputComplex = Complex.fromFloatArray(input);
+            Complex[] inputComplex = Complex.fromArray(input);
             Complex[] fftResult = FFT.fft(inputComplex);
             result[i] = Utils.fromDoubleArray2Float(Complex.modularLengthArray(fftResult));
         }
@@ -86,7 +133,7 @@ public class Filters {
             } else {
                 input = Arrays.copyOfRange(frames[i],0,nfft);
             }
-            Complex[] inputComplex = Complex.fromFloatArray(input);
+            Complex[] inputComplex = Complex.fromArray(input);
             Complex[] fftResult = FFT.rfft(inputComplex);
             result[i] = Utils.fromDoubleArray2Float(Complex.squareSumArray(fftResult));
         }
@@ -179,17 +226,6 @@ public class Filters {
         return getEnergy(signal, 400, 160, 512, (float)0.97, "raw");
     }
 
-    private static float[] _signalPad(float[] signal, int winlen, int winstep) {
-        if (signal.length<winlen) {
-            return NdArrayUtils.pad(signal, winlen);
-        }
-        if ((signal.length-winlen)%winstep == 0) {
-            return signal;
-        }
-        int numPad = winstep-((signal.length-winlen)%winstep);
-        return NdArrayUtils.pad(signal, signal.length+numPad);
-    }
-
     public static float[][] fbank(float[] signal, int samplerate, int winlen, int winstep, int nfilt, int nfft, int lowfreq, int highfreq, float preemph, String windowFunc) {
         if (signal.length<1) {
             throw new IllegalArgumentException("Empty signal.");
@@ -244,18 +280,6 @@ public class Filters {
             }
         }
         return fbResult;
-    }
-
-    public static float[] signalNormalize(int[] signal) {
-        float max = signal[0];
-        for (int i : signal) {
-            if (i>max) max = i;
-        }
-        float[] result = new float[signal.length];
-        for (int i = 0 ; i<signal.length ; i++) {
-            result[i] = ((float) signal[i])/(max);
-        }
-        return result;
     }
 
 }

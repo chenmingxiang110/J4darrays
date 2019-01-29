@@ -65,6 +65,39 @@ public class Complex {
         return new Complex(real, imag);
     }
 
+    // return a / b
+    public Complex divides(Complex b) {
+        Complex a = this;
+        return a.times(b.reciprocal());
+    }
+
+    // a static version of plus
+    public static Complex plus(Complex a, Complex b) {
+        double real = a.re + b.re;
+        double imag = a.im + b.im;
+        Complex sum = new Complex(real, imag);
+        return sum;
+    }
+
+    // a static version of minus
+    public static Complex minus(Complex a, Complex b) {
+        double real = a.re - b.re;
+        double imag = a.im - b.im;
+        return new Complex(real, imag);
+    }
+
+    // a static version of times
+    public static Complex times(Complex a, Complex b) {
+        double real = a.re * b.re - a.im * b.im;
+        double imag = a.re * b.im + a.im * b.re;
+        return new Complex(real, imag);
+    }
+
+    // a static version of divides
+    public static Complex divides(Complex a, Complex b) {
+        return a.times(b.reciprocal());
+    }
+
     // return a new object whose value is (this * alpha)
     public Complex scale(double alpha) {
         return new Complex(alpha * re, alpha * im);
@@ -85,12 +118,6 @@ public class Complex {
     public double re() { return re; }
     public double im() { return im; }
 
-    // return a / b
-    public Complex divides(Complex b) {
-        Complex a = this;
-        return a.times(b.reciprocal());
-    }
-
     // return a new Complex object whose value is the complex exponential of this
     public Complex exp() {
         return new Complex(Math.exp(re) * Math.cos(im), Math.exp(re) * Math.sin(im));
@@ -109,14 +136,6 @@ public class Complex {
     // return a new Complex object whose value is the complex tangent of this
     public Complex tan() {
         return sin().divides(cos());
-    }
-
-    // a static version of plus
-    public static Complex plus(Complex a, Complex b) {
-        double real = a.re + b.re;
-        double imag = a.im + b.im;
-        Complex sum = new Complex(real, imag);
-        return sum;
     }
 
     // real^2 + imag^2
@@ -162,7 +181,7 @@ public class Complex {
     }
 
     // Construct an array of complex numbers from an integer array.
-    public static Complex[] fromFloatArray(int[] a) {
+    public static Complex[] fromArray(int[] a) {
         Complex[] result = new Complex[a.length];
         for (int i = 0 ; i<a.length ; i++) {
             result[i] = new Complex(a[i], 0);
@@ -171,7 +190,7 @@ public class Complex {
     }
 
     // Construct an array of complex numbers from an float array.
-    public static Complex[] fromFloatArray(float[] a) {
+    public static Complex[] fromArray(float[] a) {
         Complex[] result = new Complex[a.length];
         for (int i = 0 ; i<a.length ; i++) {
             result[i] = new Complex(a[i], 0);
@@ -180,7 +199,7 @@ public class Complex {
     }
 
     // Construct an array of complex numbers from an double array.
-    public static Complex[] fromFloatArray(double[] a) {
+    public static Complex[] fromArray(double[] a) {
         Complex[] result = new Complex[a.length];
         for (int i = 0 ; i<a.length ; i++) {
             result[i] = new Complex(a[i], 0);

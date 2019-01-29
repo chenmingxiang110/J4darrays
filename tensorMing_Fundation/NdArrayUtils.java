@@ -292,7 +292,7 @@ public class NdArrayUtils {
     }
 
     // 沿着第一维计算加和。例如输入的 array 其 shape 为 [3,4,5]，输出则为 [4,5]。计算其他维度需先 transpose 再计算。
-    public static Variable sumDim1(Variable v) {
+    private static Variable sumDim1(Variable v) {
         int[] shape = v.getShape();
         if (shape.length<2) throw new IllegalArgumentException("Please use mean() instead.");
         Variable variable = new Variable("temp", Arrays.copyOfRange(shape, 1, shape.length), "zeros");
