@@ -438,6 +438,7 @@ Output
 ### Complex (Class for complex numbers)
 
 From: https://introcs.cs.princeton.edu/java/32class/Complex.java.html
+
 Modified by: chenmingxiang110
 
 |Function Name |Inputs |Type |Return |Description |
@@ -474,6 +475,24 @@ Modified by: chenmingxiang110
 |fromArray|double[] a|Static Method|Complex[]|Construct an array of complex numbers from an double array..|
 |equals|Object x|Method|boolean|-|
 |hashCode|None|Method|int|-|
+
+
+### Utils
+
+|Function Name |Inputs |Type |Return |Description |
+|---           |---    |---  |---    |---         |
+|fromFloatArray2Double|float[] input|Static Method|double[]|-|
+|fromIntArray2Double|int[] input|Static Method|double[]|-|
+|fromDoubleArray2Float|double[] input|Static Method|float[]|-|
+|fromIntArray2Float|int[] input|Static Method|float[]|-|
+|fromDoubleArray2Int|double[] input|Static Method|int[]|-|
+|fromFloatArray2Int|float[] input|Static Method|int[]|-|
+|arrayList2DoubleArray|ArrayList input|Static Method|double[]|-|
+|arrayList2FloatArray|ArrayList input|Static Method|float[]|-|
+|arrayList2IntegerArray|ArrayList input|Static Method|int[]|-|
+|arrayList2BooleanArray|ArrayList input|Static Method|boolean[]|-|
+|arrayList2CharacterArray|ArrayList input|Static Method|char[]|-|
+|arrayList2StringArray|ArrayList<String> input|Static Method|String[]|-|
 
 ### Variable
 |Function Name |Inputs |Type |Return |Description |
@@ -703,8 +722,46 @@ Package for signal processing.
 
 ### FFT
 
+From: https://introcs.cs.princeton.edu/java/32class/Complex.java.html
+
+Modified by: chenmingxiang110
+
+|Function Name |Inputs |Type |Return |Description |
+|---           |---    |---  |---    |---         |
+|fft|Complex[] x|Static Method|Complex[]|Compute the FFT of x[], assuming its length is a power of 2.|
+|rfft|Complex[] x|Static Method|Complex[]|Compute the one-dimensional discrete Fourier Transform for real input. Assuming x's length is a power of 2.|
+|ifft|Complex[] x|Static Method|Complex[]|Compute the inverse FFT of x[], assuming its length is a power of 2.|
+|cconvolve|Complex[] x, Complex[] y|Static Method|Complex[]|Compute the circular convolution of x and y.|
+|convolve|Complex[] x, Complex[] y|Static Method|Complex[]|Compute the linear convolution of x and y.|
+|show|Complex[] x, String title|Static Method|void|Display an array of Complex numbers to standard output.|
+
 ### Filters
+|Function Name |Inputs |Type |Return |Description |
+|---           |---    |---  |---    |---         |
+|frameSeg|float[] signal, int frame_len, int frame_step, String windowFunc|Static Method|float[][]|Split the data into frames. The window function can be 'raw', 'hanning', or 'hamming'.|
+|zeroPad|float[] signal, int objLength|Static Method|float[]|Pad with zeros.|
+|signalNormalize|int[] signal|Static Method|float[]|Normalize the signal by its maximum value.|
+|signalNormalize|float[] signal|Static Method|float[]|Normalize the signal by its maximum value.|
+|signalNormalize|double[] signal|Static Method|float[]|Normalize the signal by its maximum value.|
+|getEnergy|float[] signal, int winlen, int winstep, int nfft, float preemph, String windowFunc|Static Method|float[]|Return the energy. The window function can be 'raw', 'hanning', or 'hamming'.|
+|getEnergy|float[] signal|Static Method|float[]|Return the energy with default parameters. winlen = 400, winstep = 160, nfft = 512, preemph = 0.97, windowFunc = 'raw'|
+|fbank|float[] signal, int samplerate, int winlen, int winstep, int nfilt, int nfft, int lowfreq, int highfreq, float preemph, String windowFunc|Static Method|float[][]|Return the mel filter bank features. The window function can be 'raw', 'hanning', or 'hamming'.|
+|fbank|float[] signal, int samplerate|Static Method|float[][]|Return the mel filter bank features with default parameters. winlen = 400, winstep = 160, nfilt = 40, nfft = 512, lowfreq = 0, highfreq = samplerate/2, preemph = 0.97, windowFunc = 'raw'|
+|logfbank|float[] signal, int samplerate, int winlen, int winstep, int nfilt, int nfft, int lowfreq, int highfreq, float preemph, String windowFunc|Static Method|float[][]|Return the log mel filter bank features. The window function can be 'raw', 'hanning', or 'hamming'.|
+|logfbank|float[] signal, int samplerate|Static Method|float[][]|Return the log mel filter bank features with default parameters. winlen = 400, winstep = 160, nfilt = 40, nfft = 512, lowfreq = 0, highfreq = samplerate/2, preemph = 0.97, windowFunc = 'raw'|
 
 ### WaveFileReader
+|Function Name |Inputs |Type |Return |Description |
+|---           |---    |---  |---    |---         |
+|WaveFileReader|String filename|Constructor|None|Contruct a wave reader.|
+|getBitPerSample|None|Method|int|Return the bit depth (8bit or 16bit).|
+|getSampleRate|None|Method|long|Return the sampling rate.|
+|getNumChannels|None|Method|int|Return the number of channels.|
+|getDataLen|None|Method|int|Return the length of the samples.|
+|getData|None|Method|int[][]|Return the data. Data[n][m] is the sample[m] at the nth channel.|
 
 ### Window
+|Function Name |Inputs |Type |Return |Description |
+|---           |---    |---  |---    |---         |
+|hanning|int length|Static Method|float[]|Compute the hanning window.|
+|hamming|int length|Static Method|float[]|Compute the hamming window.|
