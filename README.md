@@ -436,6 +436,10 @@ Output
 ## API: tensorMing_Fundation
 
 ### Complex (Class for complex numbers)
+
+From: https://introcs.cs.princeton.edu/java/32class/Complex.java.html
+Modified by: chenmingxiang110
+
 |Function Name |Inputs |Type |Return |Description |
 |---           |---    |---  |---    |---         |
 |Complex|double real, double imag|Constructor|None|Create a new object with the given real and imaginary parts.|
