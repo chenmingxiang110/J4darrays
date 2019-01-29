@@ -2,6 +2,8 @@ package tensorMing_Signal;
 
 import tensorMing_Fundation.Complex;
 
+import java.util.Arrays;
+
 /******************************************************************************
  *  From: https://introcs.cs.princeton.edu/java/97data/FFT.java.html
  *  Modified by: chenmingxiang110
@@ -55,6 +57,10 @@ public class FFT {
             y[k + n/2] = q[k].minus(wk.times(r[k]));
         }
         return y;
+    }
+
+    public static Complex[] rfft(Complex[] x) {
+        return Arrays.copyOfRange(fft(x), 0, x.length/2+1);
     }
 
     // compute the inverse FFT of x[], assuming its length is a power of 2

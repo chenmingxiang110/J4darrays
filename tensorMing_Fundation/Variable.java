@@ -531,7 +531,7 @@ public class Variable {
                     sb.append("\n");
                 }
                 sb.append("   ...\n  ");
-                sb.append("["+v2[v2.length-1][0]+", "+v2[v2.length-1][1]+", "+v2[v2.length-1][2]+", ... , "+v2[v2.length-1][v2.length-1]+"] ]");
+                sb.append(Arrays.toString(v2[v2.length-1])+" ]");
                 return sb.toString();
             } else if (v2.length<=20 && v2[0].length>100){
                 StringBuilder sb = new StringBuilder();

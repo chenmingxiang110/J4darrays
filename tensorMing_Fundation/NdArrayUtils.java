@@ -47,6 +47,130 @@ public class NdArrayUtils {
         }
         return result;
     }
+    
+    public static int[] pad(int[] data, int objLength, int element) {
+        if (objLength<data.length) {
+            throw new IllegalArgumentException("Objective length shorter than data length.");
+        }
+        if (objLength==data.length) return data;
+        int[] result = new int[objLength];
+        for (int i = 0 ; i < result.length ; i++) {
+            if (i<data.length) {
+                result[i]=data[i];
+            } else {
+                result[i]=element;
+            }
+        }
+        return result;
+    }
+    
+    public static int[] pad(int[] data, int objLength) {
+        return pad(data, objLength, 0);
+    }
+
+    public static float[] pad(float[] data, int objLength, float element) {
+        if (objLength<data.length) {
+            throw new IllegalArgumentException("Objective length shorter than data length.");
+        }
+        if (objLength==data.length) return data;
+        float[] result = new float[objLength];
+        for (int i = 0 ; i < result.length ; i++) {
+            if (i<data.length) {
+                result[i]=data[i];
+            } else {
+                result[i]=element;
+            }
+        }
+        return result;
+    }
+
+    public static float[] pad(float[] data, int objLength) {
+        return pad(data, objLength, 0);
+    }
+
+    public static Variable pad(Variable data_v, int objLength, float element) {
+        if (data_v.getDimension()!=1) {
+            throw new IllegalArgumentException("Dimension should be 1.");
+        }
+        float[] data = data_v.get1d();
+        if (objLength<data.length) {
+            throw new IllegalArgumentException("Objective length shorter than data length.");
+        }
+        if (objLength==data.length) return data_v;
+        float[] result = new float[objLength];
+        for (int i = 0 ; i < result.length ; i++) {
+            if (i<data.length) {
+                result[i]=data[i];
+            } else {
+                result[i]=element;
+            }
+        }
+        return new Variable(result);
+    }
+
+    public static Variable pad(Variable data, int objLength) {
+        return pad(data, objLength, 0);
+    }
+
+    public static double[] pad(double[] data, int objLength, double element) {
+        if (objLength<data.length) {
+            throw new IllegalArgumentException("Objective length shorter than data length.");
+        }
+        if (objLength==data.length) return data;
+        double[] result = new double[objLength];
+        for (int i = 0 ; i < result.length ; i++) {
+            if (i<data.length) {
+                result[i]=data[i];
+            } else {
+                result[i]=element;
+            }
+        }
+        return result;
+    }
+
+    public static double[] pad(double[] data, int objLength) {
+        return pad(data, objLength, 0);
+    }
+
+    public static boolean[] pad(boolean[] data, int objLength, boolean element) {
+        if (objLength<data.length) {
+            throw new IllegalArgumentException("Objective length shorter than data length.");
+        }
+        if (objLength==data.length) return data;
+        boolean[] result = new boolean[objLength];
+        for (int i = 0 ; i < result.length ; i++) {
+            if (i<data.length) {
+                result[i]=data[i];
+            } else {
+                result[i]=element;
+            }
+        }
+        return result;
+    }
+
+    public static boolean[] pad(boolean[] data, int objLength) {
+        return pad(data, objLength, false);
+    }
+
+    public static char[] pad(char[] data, int objLength, char element) {
+        if (objLength<data.length) {
+            throw new IllegalArgumentException("Objective length shorter than data length.");
+        }
+        if (objLength==data.length) return data;
+        char[] result = new char[objLength];
+        for (int i = 0 ; i < result.length ; i++) {
+            if (i<data.length) {
+                result[i]=data[i];
+            } else {
+                result[i]=element;
+            }
+        }
+        return result;
+    }
+
+    public static char[] pad(char[] data, int objLength) {
+        return pad(data, objLength, (char)0);
+    }
 
     public static boolean equals(Variable v1, Variable v2) {
         int[] vShape = v2.getShape();

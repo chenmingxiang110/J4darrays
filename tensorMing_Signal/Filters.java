@@ -23,15 +23,15 @@ public class Filters {
 
         int nTimeStep = (signal.length-frame_len+frame_step)/frame_step;
         float[][] result = new float[nTimeStep][frame_len];
-        for (int i = 0 ; i<signal.length ; i+=frame_step) {
+        for (int i = 0 ; i<nTimeStep ; i++) {
             if (windowFunc == "raw") {
-                result[i] = Arrays.copyOfRange(signal, i, i+frame_len);
+                result[i] = Arrays.copyOfRange(signal, i*frame_step, i*frame_step+frame_len);
             } else if (windowFunc == "hamming") {
-                result[i] = Arrays.copyOfRange(signal, i, i+frame_len);
+                result[i] = Arrays.copyOfRange(signal, i*frame_step, i*frame_step+frame_len);
                 float[] window = Window.hamming(frame_len);
                 for (int j = 0 ; j<frame_len ; j++) result[i][j]*=window[j];
             } else if (windowFunc == "hanning") {
-                result[i] = Arrays.copyOfRange(signal, i, i+frame_len);
+                result[i] = Arrays.copyOfRange(signal, i*frame_step, i*frame_step+frame_len);
                 float[] window = Window.hanning(frame_len);
                 for (int j = 0 ; j<frame_len ; j++) result[i][j]*=window[j];
             } else {
@@ -61,7 +61,7 @@ public class Filters {
 
     // Compute the magnitude spectrum of each frame in frames. If frames is an NxD matrix, output will be Nx(NFFT/2+1).
     public static float[][] magspec(float[][] frames, int nfft) {
-        float[][] result = new float[frames.length][frames[0].length];
+        float[][] result = new float[frames.length][nfft/2+1];
         for (int i = 0 ; i<frames.length ; i++) {
             float[] input;
             if (nfft>frames[i].length) {
@@ -78,7 +78,7 @@ public class Filters {
 
     // Compute the power spectrum of each frame in frames. If frames is an NxD matrix, output will be Nx(NFFT/2+1).
     public static float[][] powspec(float[][] frames, int nfft) {
-        float[][] result = new float[frames.length][frames[0].length];
+        float[][] result = new float[frames.length][nfft/2+1];
         for (int i = 0 ; i<frames.length ; i++) {
             float[] input;
             if (nfft>frames[i].length) {
@@ -87,7 +87,7 @@ public class Filters {
                 input = Arrays.copyOfRange(frames[i],0,nfft);
             }
             Complex[] inputComplex = Complex.fromFloatArray(input);
-            Complex[] fftResult = FFT.fft(inputComplex);
+            Complex[] fftResult = FFT.rfft(inputComplex);
             result[i] = Utils.fromDoubleArray2Float(Complex.squareSumArray(fftResult));
         }
 
@@ -122,7 +122,7 @@ public class Filters {
     public static float[] mel2hz(float[] mels){
         float[] result = new float[mels.length];
         for (int i = 0 ; i<mels.length ; i++) {
-            result[i] = (float) (700.0*Math.pow(10.0, (mels[i]/2595.0)-1.0));
+            result[i] = (float) (700.0*(Math.pow(10.0, (mels[i]/2595.0))-1.0));
         }
         return result;
     }
@@ -164,7 +164,7 @@ public class Filters {
         if (signal.length<1) {
             throw new IllegalArgumentException("Empty signal.");
         }
-        float eps = (float) 1e-16;
+        float eps = (float) 1e-32;
         float[] signalEmp = preemphasis(signal, preemph);
         float[][] frames = frameSeg(signalEmp, winlen, winstep, windowFunc);
         float[][] pspec = powspec(frames, nfft);
@@ -179,13 +179,25 @@ public class Filters {
         return getEnergy(signal, 400, 160, 512, (float)0.97, "raw");
     }
 
+    private static float[] _signalPad(float[] signal, int winlen, int winstep) {
+        if (signal.length<winlen) {
+            return NdArrayUtils.pad(signal, winlen);
+        }
+        if ((signal.length-winlen)%winstep == 0) {
+            return signal;
+        }
+        int numPad = winstep-((signal.length-winlen)%winstep);
+        return NdArrayUtils.pad(signal, signal.length+numPad);
+    }
+
     public static float[][] fbank(float[] signal, int samplerate, int winlen, int winstep, int nfilt, int nfft, int lowfreq, int highfreq, float preemph, String windowFunc) {
         if (signal.length<1) {
             throw new IllegalArgumentException("Empty signal.");
         }
-        float eps = (float) 1e-16;
+        float eps = (float) 1e-32;
         float[] signalEmp = preemphasis(signal, preemph);
-        float[][] frames = frameSeg(signalEmp, winlen, winstep, windowFunc);
+        float[] signal_padded = _signalPad(signalEmp, winlen, winstep);
+        float[][] frames = frameSeg(signal_padded, winlen, winstep, windowFunc);
         float[][] pspec = powspec(frames, nfft);
         float[] energy = NdArrayUtils.sum(new Variable(pspec), 1).get1d();
         for (int i = 0 ; i<energy.length ; i++) {
@@ -215,7 +227,7 @@ public class Filters {
         float[][] fbResult = fbank(signal, samplerate, winlen, winstep, nfilt, nfft, lowfreq, highfreq, preemph, windowFunc);
         for (int i = 0 ; i<fbResult.length ; i++) {
             for (int j = 0 ; j<fbResult[0].length ; j++) {
-                fbResult[i][j] = (float) (Math.log(fbResult[i][j])/Math.log(10));
+                fbResult[i][j] = (float) Math.log10(fbResult[i][j]);
             }
         }
         return fbResult;
@@ -228,10 +240,22 @@ public class Filters {
         float[][] fbResult = fbank(signal, samplerate, 400, 160, 40, 512, 0, samplerate/2, (float)0.97, "raw");
         for (int i = 0 ; i<fbResult.length ; i++) {
             for (int j = 0 ; j<fbResult[0].length ; j++) {
-                fbResult[i][j] = (float) (Math.log(fbResult[i][j])/Math.log(10));
+                fbResult[i][j] = (float) Math.log10(fbResult[i][j]);
             }
         }
         return fbResult;
+    }
+
+    public static float[] signalNormalize(int[] signal) {
+        float max = signal[0];
+        for (int i : signal) {
+            if (i>max) max = i;
+        }
+        float[] result = new float[signal.length];
+        for (int i = 0 ; i<signal.length ; i++) {
+            result[i] = ((float) signal[i])/(max);
+        }
+        return result;
     }
 
 }
