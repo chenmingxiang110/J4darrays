@@ -803,18 +803,18 @@ Modified by: chenmingxiang110
 ### StringDistance
 |Function Name |Inputs |Type |Return |Description |
 |---           |---    |---  |---    |---         |
-|getLevenshteinDistance|String a, String b|Method|int|-|
-|getDamerauLevenshteinDistance|String a, String b|Method|int|-|
-|getLevenshteinSim|String a, String b|Method|float|-|
-|getDamerauLevenshteinSim|String a, String b|Method|float|-|
-|getJaroSim|String a, String b|Method|float|-|
-|getJaroWinklerSim|String a, String b, float scale|Method|float|-|
-|getJaroWinklerSim|String a, String b|Method|float|-|
-|getHammingDistance|String a, String b|Method|int|-|
-|getWER|String a, String b|Method|float|-|
-|getNearstString|String a, ArrayList<String> sl|Method|String|-|
-|getNearstString|String a, String[] sl|Method|String|-|
-|getKNearstString|String a, int k, String mode, ArrayList<String> sl|Method|String[]|-|
-|getKNearstString|String a, int k, String mode, String[] sl|Method|String[]|-|
-|getKNearstString|String a, int k, String mode, int prefix, ArrayList<String> sl|Method|String[]|-|
-|getKNearstString|String a, int k, String mode, int prefix, String[] sl|Method|String[]|-|
+|getLevenshteinDistance|String a, String b|Static Method|int|-|
+|getDamerauLevenshteinDistance|String a, String b|Static Method|int|-|
+|getLevenshteinSim|String a, String b|Static Method|float|-|
+|getDamerauLevenshteinSim|String a, String b|Static Method|float|-|
+|getJaroSim|String a, String b|Static Method|float|-|
+|getJaroWinklerSim|String a, String b, float scale|Static Method|float|-|
+|getJaroWinklerSim|String a, String b|Static Method|float|-|
+|getHammingDistance|String a, String b|Static Method|int|-|
+|getWER|String a, String b|Static Method|float|-|
+|getNearstString|String a, ArrayList<String> sl|Static Method|String|-|
+|getNearstString|String a, String[] sl|Static Method|String|-|
+|getKNearstString|String a, int k, String mode, ArrayList<String> sl|Static Method|String[]|-|
+|getKNearstString|String a, int k, String mode, String[] sl|Static Method|String[]|-|
+|getKNearstString|String a, int k, String mode, int prefix, ArrayList<String> sl|Static Method|String[]|-|
+|getKNearstString|String a, int k, String mode, int prefix, String[] sl|Static Method|String[]|-|
