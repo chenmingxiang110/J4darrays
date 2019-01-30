@@ -432,6 +432,37 @@ Output
 334, 40
 [1.8962096E-7, 3.4185337E-7, 9.402056E-7, 1.6399817E-6, 1.0302442E-6, 1.09921196E-7, 5.8180127E-8, 7.9379156E-8, 1.0080868E-7, 4.353177E-7, 6.6304665E-8, 1.0899443E-7, 1.8622359E-7, 1.5437374E-7, 1.3609801E-7, 3.939218E-7, 3.2756626E-7, 3.0788763E-7, 6.7817393E-7, 8.273825E-7, 2.1179642E-7, 2.2922988E-7, 4.5069845E-7, 7.3705854E-7, 8.046142E-7, 1.0174477E-6, 8.1260987E-7, 8.6839526E-7, 1.4368326E-6, 1.2279133E-6, 3.4668137E-6, 3.7141112E-6, 2.9962564E-6, 5.8050646E-6, 3.4515017E-6, 5.012597E-6, 4.8750767E-6, 4.9365394E-6, 5.2051E-6, 6.3636767E-6]
 ```
+9. String distance
+```
+public static void main(String[] args) {
+    float sim = StringDistance.getJaroSim("jellyfish", "smellyfish");
+    System.out.println(sim);
+    sim = StringDistance.getJaroWinklerSim("jellyfish", "jemellyfish", (float)0.3);
+    System.out.println(sim);
+    sim = StringDistance.getJaroWinklerSim("jellyfish", "jemellyfish");
+    System.out.println(sim);
+    sim = StringDistance.getLevenshteinDistance("jellyfish", "smellyfishee");
+    System.out.println(sim);
+
+    /////////////////////////////////////////////////////////////////////////////
+
+    String word = "pencelboux";
+    String[] wordBank = new String[]{"ruler", "pencil", "pencilbox", "pen_box", "poncelboux", "fishing"};
+    String[] rec = StringDistance.getKNearstString(word, 3, "leve", wordBank);
+    System.out.println(Arrays.toString(rec));
+    rec = StringDistance.getKNearstString(word, 3, "leve", 3, wordBank);
+    System.out.println(Arrays.toString(rec));
+}
+```
+Output
+```
+0.8962963
+0.9757576
+0.95151514
+4.0
+[poncelboux, pencilbox, pen_box]
+[pencilbox, pen_box, pencil]
+```
 
 ## API: tensorMing_Fundation
 
@@ -718,6 +749,7 @@ Modified by: chenmingxiang110
 |predict|Variable input, ArrayList<Variable> xs, ArrayList<Integer> ys, int maxLabel|Method|float[]|Return the probabilities of labels.|
 
 ## API: tensorMing_Signal
+
 Package for signal processing.
 
 ### FFT
@@ -765,3 +797,24 @@ Modified by: chenmingxiang110
 |---           |---    |---  |---    |---         |
 |hanning|int length|Static Method|float[]|Compute the hanning window.|
 |hamming|int length|Static Method|float[]|Compute the hamming window.|
+
+## API: tensorMing_Evaluation
+
+### StringDistance
+|Function Name |Inputs |Type |Return |Description |
+|---           |---    |---  |---    |---         |
+|getLevenshteinDistance|String a, String b|Method|int|-|
+|getDamerauLevenshteinDistance|String a, String b|Method|int|-|
+|getLevenshteinSim|String a, String b|Method|float|-|
+|getDamerauLevenshteinSim|String a, String b|Method|float|-|
+|getJaroSim|String a, String b|Method|float|-|
+|getJaroWinklerSim|String a, String b, float scale|Method|float|-|
+|getJaroWinklerSim|String a, String b|Method|float|-|
+|getHammingDistance|String a, String b|Method|int|-|
+|getWER|String a, String b|Method|float|-|
+|getNearstString|String a, ArrayList<String> sl|Method|String|-|
+|getNearstString|String a, String[] sl|Method|String|-|
+|getKNearstString|String a, int k, String mode, ArrayList<String> sl|Method|String[]|-|
+|getKNearstString|String a, int k, String mode, String[] sl|Method|String[]|-|
+|getKNearstString|String a, int k, String mode, int prefix, ArrayList<String> sl|Method|String[]|-|
+|getKNearstString|String a, int k, String mode, int prefix, String[] sl|Method|String[]|-|
