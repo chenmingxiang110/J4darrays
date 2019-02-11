@@ -412,7 +412,7 @@ Output
 8. Signal process
 ```
 public static void main(String[] args) {
-    WaveFileReader wfr = new WaveFileReader("audio_test.wav");
+    WaveFileReader_legacy wfr = new WaveFileReader_legacy("audio_test.wav");
     float[] data = Filters.signalNormalize(wfr.getData()[0]);
     int rate = (int)wfr.getSampleRate();
     System.out.println(data.length);
@@ -423,6 +423,15 @@ public static void main(String[] args) {
     System.out.print(", ");
     System.out.println(fb[0].length);
     System.out.println(Arrays.toString(fb[333]));
+    
+    long[] info = WaveFileIO.readInfo("audio_test_short.wav");
+    System.out.println(Arrays.toString(info));
+    double[][] data = WaveFileIO.read("audio_test_short.wav");
+    float[][] dataNorm = WaveFileIO.readNorm("audio_test_short.wav");
+    WaveFileIO.write(data, (int)info[0], "test_raw.wav");
+    WaveFileIO.write(dataNorm, (int)info[0], "test_norm.wav");
+    dataNorm[0] = VAD.clip(dataNorm[0], (int)info[0]);
+    WaveFileIO.write(dataNorm, (int)info[0], "test_clip.wav");
 }
 ```
 Output
@@ -431,6 +440,7 @@ Output
 16000
 334, 40
 [1.8962096E-7, 3.4185337E-7, 9.402056E-7, 1.6399817E-6, 1.0302442E-6, 1.09921196E-7, 5.8180127E-8, 7.9379156E-8, 1.0080868E-7, 4.353177E-7, 6.6304665E-8, 1.0899443E-7, 1.8622359E-7, 1.5437374E-7, 1.3609801E-7, 3.939218E-7, 3.2756626E-7, 3.0788763E-7, 6.7817393E-7, 8.273825E-7, 2.1179642E-7, 2.2922988E-7, 4.5069845E-7, 7.3705854E-7, 8.046142E-7, 1.0174477E-6, 8.1260987E-7, 8.6839526E-7, 1.4368326E-6, 1.2279133E-6, 3.4668137E-6, 3.7141112E-6, 2.9962564E-6, 5.8050646E-6, 3.4515017E-6, 5.012597E-6, 4.8750767E-6, 4.9365394E-6, 5.2051E-6, 6.3636767E-6]
+[48000, 1, 52224, 16]
 ```
 9. String distance
 ```
@@ -518,6 +528,12 @@ Modified by: chenmingxiang110
 |fromIntArray2Float|int[] input|Static Method|float[]|-|
 |fromDoubleArray2Int|double[] input|Static Method|int[]|-|
 |fromFloatArray2Int|float[] input|Static Method|int[]|-|
+|fromFloatArray2Double|float[][] input|Static Method|double[][]|-|
+|fromIntArray2Double|int[][] input|Static Method|double[][]|-|
+|fromDoubleArray2Float|double[][] input|Static Method|float[][]|-|
+|fromIntArray2Float|int[][] input|Static Method|float[][]|-|
+|fromDoubleArray2Int|double[][] input|Static Method|int[][]|-|
+|fromFloatArray2Int|float[][] input|Static Method|int[][]|-|
 |arrayList2DoubleArray|ArrayList input|Static Method|double[]|-|
 |arrayList2FloatArray|ArrayList input|Static Method|float[]|-|
 |arrayList2IntegerArray|ArrayList input|Static Method|int[]|-|
@@ -782,15 +798,31 @@ Modified by: chenmingxiang110
 |logfbank|float[] signal, int samplerate, int winlen, int winstep, int nfilt, int nfft, int lowfreq, int highfreq, float preemph, String windowFunc|Static Method|float[][]|Return the log mel filter bank features. The window function can be 'raw', 'hanning', or 'hamming'.|
 |logfbank|float[] signal, int samplerate|Static Method|float[][]|Return the log mel filter bank features with default parameters. winlen = 400, winstep = 160, nfilt = 40, nfft = 512, lowfreq = 0, highfreq = samplerate/2, preemph = 0.97, windowFunc = 'raw'|
 
-### WaveFileReader
+### WaveFileReader_legacy
 |Function Name |Inputs |Type |Return |Description |
 |---           |---    |---  |---    |---         |
-|WaveFileReader|String filename|Constructor|None|Contruct a wave reader.|
+|WaveFileReader_legacy|String filename|Constructor|None|Contruct a wave reader.|
 |getBitPerSample|None|Method|int|Return the bit depth (8bit or 16bit).|
 |getSampleRate|None|Method|long|Return the sampling rate.|
 |getNumChannels|None|Method|int|Return the number of channels.|
 |getDataLen|None|Method|int|Return the length of the samples.|
 |getData|None|Method|int[][]|Return the data. Data[n][m] is the sample[m] at the nth channel.|
+
+### WaveFile
+
+From: A.Greensted
+
+http://www.labbookpages.co.uk
+
+File format is based on the information from
+
+http://www.sonicspot.com/guide/wavefiles.html
+
+http://www.blitter.com/~russtopia/MIDI/~jglatt/tech/wave.htm
+
+Version 1.0
+
+API: http://www.labbookpages.co.uk/audio/javaWavFiles.html#overview
 
 ### Window
 |Function Name |Inputs |Type |Return |Description |
