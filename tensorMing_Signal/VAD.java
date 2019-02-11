@@ -6,40 +6,40 @@ import java.util.Arrays;
 
 public class VAD {
 
-    public static float[] detect(float[] input, int rate) {
+    public static float[] clip(float[] input, int rate) {
         if (input.length<=0) {
             return input;
         }
-        return detect(input, rate, 0.25, 0.2, 0.5);
+        return clip(input, rate, 0.2, 0.1, 0.5);
     }
 
-    public static float[] detect(float[] input, int rate, double starting, double ending, double durance) {
+    public static float[] clip(float[] input, int rate, double starting, double ending, double durance) {
         if (input.length<=0) {
             return input;
         }
-        return detect(input, rate, 400, 160, 0.25, 0.2, 0.5);
+        return clip(input, rate, 400, 160, starting, ending, durance);
     }
 
-    public static float[] detect(float[] input, int rate, int frameLength, int frameStride, double starting, double ending, double durance) {
+    public static float[] clip(float[] input, int rate, int frameLength, int frameStride, double starting, double ending, double durance) {
         if (input.length<=0) {
             return input;
         }
-        double[] result = detect(Utils.fromFloatArray2Double(input), rate, frameLength, frameStride, starting, ending, durance);
+        double[] result = clip(Utils.fromFloatArray2Double(input), rate, frameLength, frameStride, starting, ending, durance);
         return Utils.fromDoubleArray2Float(result);
     }
 
-    public static double[] detect(double[] input, int rate) {
+    public static double[] clip(double[] input, int rate) {
         if (input.length<=0) {
             return input;
         }
-        return detect(input, rate, 0.25, 0.2, 0.5);
+        return clip(input, rate, 0.25, 0.2, 0.5);
     }
 
-    public static double[] detect(double[] input, int rate, double starting, double ending, double durance) {
+    public static double[] clip(double[] input, int rate, double starting, double ending, double durance) {
         if (input.length<=0) {
             return input;
         }
-        return detect(input, rate, 400, 160, 0.25, 0.2, 0.5);
+        return clip(input, rate, 400, 160, starting, ending, durance);
     }
 
     private static double getEnergy(double[] frame) {
@@ -50,7 +50,7 @@ public class VAD {
         return energy;
     }
 
-    public static double[] detect(double[] input, int rate, int frameLength, int frameStride, double starting, double ending, double durance) {
+    public static double[] clip(double[] input, int rate, int frameLength, int frameStride, double starting, double ending, double durance) {
         if (input.length<=0) {
             return input;
         }
@@ -67,7 +67,7 @@ public class VAD {
             double energy = getEnergy(Arrays.copyOfRange(input, i, i+frameLength));
             if (startPoint<0) {
                 if (energy>=startingT) {
-                    startPoint = Math.max(i-frameStride, 0);
+                    startPoint = Math.max(i-duranceFrames*frameStride/2, 0);
                 }
             } else {
                 if (energy<=endingT) {
