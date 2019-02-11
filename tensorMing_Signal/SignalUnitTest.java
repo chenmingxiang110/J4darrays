@@ -21,8 +21,8 @@ public class SignalUnitTest {
         System.out.println(Arrays.toString(info));
         double[][] data = WaveFileIO.read("audio_test_short.wav");
         float[][] dataNorm = WaveFileIO.readNorm("audio_test_short.wav");
-//        WaveFileIO.write(data, (int)info[0], "test_raw.wav");
-//        WaveFileIO.write(dataNorm, (int)info[0], "test_norm.wav");
+        WaveFileIO.write(data, (int)info[0], "test_raw.wav");
+        WaveFileIO.write(dataNorm, (int)info[0], "test_norm.wav");
         dataNorm[0] = VAD.clip(dataNorm[0], (int)info[0]);
         WaveFileIO.write(dataNorm, (int)info[0], "test_clip.wav");
     }
