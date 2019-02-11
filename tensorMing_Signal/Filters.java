@@ -82,14 +82,14 @@ public class Filters {
         return result;
     }
 
-    public static float[] signalNormalize(double[] signal) {
+    public static double[] signalNormalize(double[] signal) {
         double max = signal[0];
         for (double i : signal) {
             if (i>max) max = i;
         }
-        float[] result = new float[signal.length];
+        double[] result = new double[signal.length];
         for (int i = 0 ; i<signal.length ; i++) {
-            result[i] = ((float) signal[i])/((float)max);
+            result[i] = signal[i]/max;
         }
         return result;
     }
