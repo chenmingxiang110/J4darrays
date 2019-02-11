@@ -798,6 +798,16 @@ Modified by: chenmingxiang110
 |logfbank|float[] signal, int samplerate, int winlen, int winstep, int nfilt, int nfft, int lowfreq, int highfreq, float preemph, String windowFunc|Static Method|float[][]|Return the log mel filter bank features. The window function can be 'raw', 'hanning', or 'hamming'.|
 |logfbank|float[] signal, int samplerate|Static Method|float[][]|Return the log mel filter bank features with default parameters. winlen = 400, winstep = 160, nfilt = 40, nfft = 512, lowfreq = 0, highfreq = samplerate/2, preemph = 0.97, windowFunc = 'raw'|
 
+### VAD
+|Function Name |Inputs |Type |Return |Description |
+|---           |---    |---  |---    |---         |
+|clip|float[] input, int rate|Static Method|float[]|-|
+|clip|float[] input, int rate, double starting, double ending, double durance|Static Method|float[]|-|
+|clip|float[] input, int rate, int frameLength, int frameStride, double starting, double ending, double durance|Static Method|float[]|-|
+|clip|double[] input, int rate|Static Method|double[]|-|
+|clip|double[] input, int rate, double starting, double ending, double durance|Static Method|double[]|-|
+|clip|double[] input, int rate, int frameLength, int frameStride, double starting, double ending, double durance|Static Method|double[]|-|
+
 ### WaveFileReader_legacy
 |Function Name |Inputs |Type |Return |Description |
 |---           |---    |---  |---    |---         |
@@ -807,6 +817,17 @@ Modified by: chenmingxiang110
 |getNumChannels|None|Method|int|Return the number of channels.|
 |getDataLen|None|Method|int|Return the length of the samples.|
 |getData|None|Method|int[][]|Return the data. Data[n][m] is the sample[m] at the nth channel.|
+
+### WaveFileIO
+|Function Name |Inputs |Type |Return |Description |
+|---           |---    |---  |---    |---         |
+|write|float[] data, int rate, String path|Static Method|None|-|
+|write|float[][] data, int rate, String path|Static Method|None|-|
+|write|double[] data, int rate, String path|Static Method|None|-|
+|write|double[][] data, int rate, String path|Static Method|None|-|
+|read|String path|Static Method|double[][]|-|
+|readNorm|String path|Static Method|float[][]|-|
+|readInfo|String path|Static Method|long[][]|-|
 
 ### WaveFile
 
