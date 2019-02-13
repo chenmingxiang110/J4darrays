@@ -17,6 +17,87 @@ public class Filters {
         return NdArrayUtils.pad(signal, signal.length+numPad);
     }
 
+    public static int[] mergeChannels(int[][] signal) {
+        int[] result = new int[signal[0].length];
+        for (int i = 0 ; i<signal[0].length ; i++) {
+            int sum = 0;
+            for (int j = 0 ; j<signal.length ; j++) {
+                sum+=signal[j][i];
+            }
+            result[i] = sum/signal.length;
+        }
+        return result;
+    }
+
+    public static float[] mergeChannels(float[][] signal) {
+        float[] result = new float[signal[0].length];
+        for (int i = 0 ; i<signal[0].length ; i++) {
+            float sum = 0;
+            for (int j = 0 ; j<signal.length ; j++) {
+                sum+=signal[j][i];
+            }
+            result[i] = sum/signal.length;
+        }
+        return result;
+    }
+
+    public static double[] mergeChannels(double[][] signal) {
+        double[] result = new double[signal[0].length];
+        for (int i = 0 ; i<signal[0].length ; i++) {
+            double sum = 0;
+            for (int j = 0 ; j<signal.length ; j++) {
+                sum+=signal[j][i];
+            }
+            result[i] = sum/signal.length;
+        }
+        return result;
+    }
+
+    public static int[] mergeChannels(int[][] signal, boolean timeMajor) {
+        if (timeMajor) {
+            int[] result = new int[signal.length];
+            for (int i = 0 ; i<signal.length ; i++) {
+                int sum = 0;
+                for (int j = 0 ; j<signal[0].length ; j++) {
+                    sum+=signal[i][j];
+                }
+                result[i] = sum/signal.length;
+            }
+            return result;
+        }
+        return mergeChannels(signal);
+    }
+
+    public static float[] mergeChannels(float[][] signal, boolean timeMajor) {
+        if (timeMajor) {
+            float[] result = new float[signal.length];
+            for (int i = 0 ; i<signal.length ; i++) {
+                float sum = 0;
+                for (int j = 0 ; j<signal[0].length ; j++) {
+                    sum+=signal[i][j];
+                }
+                result[i] = sum/signal.length;
+            }
+            return result;
+        }
+        return mergeChannels(signal);
+    }
+
+    public static double[] mergeChannels(double[][] signal, boolean timeMajor) {
+        if (timeMajor) {
+            double[] result = new double[signal.length];
+            for (int i = 0 ; i<signal.length ; i++) {
+                double sum = 0;
+                for (int j = 0 ; j<signal[0].length ; j++) {
+                    sum+=signal[i][j];
+                }
+                result[i] = sum/signal.length;
+            }
+            return result;
+        }
+        return mergeChannels(signal);
+    }
+
     // Frame a signal into overlapping frames.
     public static float[][] frameSeg(float[] signal, int frame_len, int frame_step, String windowFunc) {
         if (signal.length<1) {
