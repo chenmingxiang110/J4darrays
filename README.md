@@ -787,6 +787,12 @@ Modified by: chenmingxiang110
 |Function Name |Inputs |Type |Return |Description |
 |---           |---    |---  |---    |---         |
 |frameSeg|float[] signal, int frame_len, int frame_step, String windowFunc|Static Method|float[][]|Split the data into frames. The window function can be 'raw', 'hanning', or 'hamming'.|
+|mergeChannels|int[][] signal|Static Method|int[]|Default time major == false.|
+|mergeChannels|float[][] signal|Static Method|float[]|Default time major == false.|
+|mergeChannels|double[][] signal|Static Method|double[]|Default time major == false.|
+|mergeChannels|int[][] signal, boolean timeMajor|Static Method|float[]|-|
+|mergeChannels|float[][] signal, boolean timeMajor|Static Method|float[]|-|
+|mergeChannels|double[][] signal, boolean timeMajor|Static Method|float[]|-|
 |zeroPad|float[] signal, int objLength|Static Method|float[]|Pad with zeros.|
 |signalNormalize|int[] signal|Static Method|float[]|Normalize the signal by its maximum value.|
 |signalNormalize|float[] signal|Static Method|float[]|Normalize the signal by its maximum value.|
