@@ -3,6 +3,13 @@ package tensorMing_Fundation;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/******************************************************************************
+ *
+ *  This class is deprecated. Will be removed in the future. All of the content
+ *  can be found in NdArrayMath.
+ *
+ ******************************************************************************/
+
 public class NdArrayUtils {
 
     public NdArrayUtils() {}

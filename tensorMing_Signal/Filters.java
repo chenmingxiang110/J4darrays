@@ -134,6 +134,9 @@ public class Filters {
     }
 
     public static float[] zeroPad(float[] signal, int objLength) {
+        if (signal.length>objLength) {
+            throw new IllegalArgumentException("Signal length larger than the object length.");
+        }
         float[] result = new float[objLength];
         for (int i = 0 ; i<signal.length ; i++) result[i] = signal[i];
         return result;
@@ -199,7 +202,7 @@ public class Filters {
             }
             Complex[] inputComplex = Complex.fromArray(input);
             Complex[] fftResult = FFT.fft(inputComplex);
-            result[i] = Utils.fromDoubleArray2Float(Complex.modularLengthArray(fftResult));
+            result[i] = ArrayUtils.fromDoubleArray2Float(Complex.modularLengthArray(fftResult));
         }
         return result;
     }
@@ -216,7 +219,7 @@ public class Filters {
             }
             Complex[] inputComplex = Complex.fromArray(input);
             Complex[] fftResult = FFT.rfft(inputComplex);
-            result[i] = Utils.fromDoubleArray2Float(Complex.squareSumArray(fftResult));
+            result[i] = ArrayUtils.fromDoubleArray2Float(Complex.squareSumArray(fftResult));
         }
 
         for (int i = 0 ; i<result.length ; i++) {

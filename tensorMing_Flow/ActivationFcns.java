@@ -110,7 +110,7 @@ public class ActivationFcns {
         }
     }
 
-    public static Variable[] Relu2(Variable v, float shrinkConstant) {
+    public static Variable[] LeakyRelu(Variable v, float alpha) {
         int[] shape = v.getShape();
         Variable variable = new Variable("temp", shape, "zeros");
         Variable variable2 = new Variable("temp", shape, "zeros");
@@ -119,8 +119,8 @@ public class ActivationFcns {
             float[] grad = new float[shape[0]];
             for (int i = 0 ; i<shape[0] ; i++) {
                 if (values[i]<0) {
-                    values[i]*=shrinkConstant;
-                    grad[i]=shrinkConstant;
+                    values[i]*=alpha;
+                    grad[i]=alpha;
                 } else {
                     grad[i]=1;
                 }
@@ -134,8 +134,8 @@ public class ActivationFcns {
             for (int i = 0 ; i<shape[0] ; i++) {
                 for (int j = 0 ; j<shape[1] ; j++) {
                     if (values[i][j]<0) {
-                        values[i][j]*=shrinkConstant;
-                        grad[i][j]=shrinkConstant;
+                        values[i][j]*=alpha;
+                        grad[i][j]=alpha;
                     } else {
                         grad[i][j]=1;
                     }
@@ -151,8 +151,8 @@ public class ActivationFcns {
                 for (int j = 0 ; j<shape[1] ; j++) {
                     for (int k = 0 ; k<shape[2] ; k++) {
                         if (values[i][j][k]<0) {
-                            values[i][j][k]*=shrinkConstant;
-                            grad[i][j][k]=shrinkConstant;
+                            values[i][j][k]*=alpha;
+                            grad[i][j][k]=alpha;
                         } else {
                             grad[i][j][k]=1;
                         }
@@ -170,8 +170,8 @@ public class ActivationFcns {
                     for (int k = 0 ; k<shape[2] ; k++) {
                         for (int l = 0 ; l<shape[3] ; l++) {
                             if (values[i][j][k][l]<0) {
-                                values[i][j][k][l]*=shrinkConstant;
-                                grad[i][j][k][l]=shrinkConstant;
+                                values[i][j][k][l]*=alpha;
+                                grad[i][j][k][l]=alpha;
                             } else {
                                 grad[i][j][k][l]=1;
                             }

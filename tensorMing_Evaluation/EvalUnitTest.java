@@ -7,7 +7,9 @@ public class EvalUnitTest {
     public static void main(String[] args) {
 //        float sim = StringDistance.getJaroSim("jellyfish", "smellyfish");
 //        System.out.println(sim);
-//        sim = StringDistance.getJaroWinklerSim("jellyfish", "smellyfish", (float)0.1);
+//        sim = StringDistance.getJaroWinklerSim("jellyfish", "jemellyfish", (float)0.3);
+//        System.out.println(sim);
+//        sim = StringDistance.getJaroWinklerSim("jellyfish", "jemellyfish");
 //        System.out.println(sim);
 //        sim = StringDistance.getJaroSim("jellyfish", "jellyfishee");
 //        System.out.println(sim);

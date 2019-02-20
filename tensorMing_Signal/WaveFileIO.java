@@ -1,19 +1,30 @@
 package tensorMing_Signal;
 
-import tensorMing_Fundation.Utils;
+import tensorMing_Fundation.ArrayUtils;
 
 import java.io.*;
+import java.nio.ByteBuffer;
 
 
 public class WaveFileIO {
 
+    public static int[][] readBuffer16(byte[] input, int nChannels) {
+        int[][] ret = new int[nChannels][input.length/(2*nChannels)];
+        for (int x = 0; x < input.length; x+=(2*nChannels)) {
+            for (int j = 0 ; j<nChannels ; j++) {
+                ret[j][x/(2*nChannels)] = input[x+j*2+1]<<8+input[x+j*2];
+            }
+        }
+        return ret;
+    }
+
     public static void write(float[] data, int rate, String path) {
-        double[] dataTransformed = Utils.fromFloatArray2Double(data);
+        double[] dataTransformed = ArrayUtils.fromFloatArray2Double(data);
         write(dataTransformed, rate, path);
     }
 
     public static void write(float[][] data, int rate, String path) {
-        double[][] dataTransformed = Utils.fromFloatArray2Double(data);
+        double[][] dataTransformed = ArrayUtils.fromFloatArray2Double(data);
         write(dataTransformed, rate, path);
     }
 
@@ -57,7 +68,7 @@ public class WaveFileIO {
     }
 
     public static float[][] readNorm(String path) {
-        float[][] data = Utils.fromDoubleArray2Float(read(path));
+        float[][] data = ArrayUtils.fromDoubleArray2Float(read(path));
         for (int i = 0 ; i<data.length ; i++) {
             data[i] = Filters.signalNormalize(data[i]);
         }

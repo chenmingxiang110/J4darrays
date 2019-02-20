@@ -10,19 +10,9 @@ public class Simpleyx2 {
 
     public static void main(String[] args) {
         Variable x = new Variable("temp", new int[]{10}, "arange");
-        x = NdArrayUtils.repeat(x, new int[]{1,10});
+        x = NdArrayUtils.repeat(x, 1);
         x = NdArrayUtils.transpose(x);
-//        x = NdArrayUtils.elementWiseMultiply(x, (float)0.2);
         Variable y = NdArrayUtils.elementWiseMultiply(x,x);
-
-//        System.out.println(x);
-//        System.out.println(y);
-//        System.out.println("(0.2*0.2)==0.04 "+((0.2*0.2)==0.04));
-//        System.out.println("");
-//
-//        System.out.println(ActivationFcns.Sigmoid(x)[0]);
-//        System.out.println(ActivationFcns.Sigmoid(x)[1]);
-//        System.out.println("==========================");
 
         Variable m1 = new Variable("m1", new int[]{1,10}, "xavier");
         Variable b1 = new Variable("b1", new int[]{10}, "xavier");
@@ -37,15 +27,11 @@ public class Simpleyx2 {
 
         for (int i = 0 ; i<NUM_STEP ; i++) {
             Variable[] outputm1 = ActivationFcns.Relu(NdArrayUtils.matmul(x, m1));
-            Variable output1 = NdArrayUtils.elementWiseAdd(outputm1[0], NdArrayUtils.repeat(b1, new int[]{10,10}));
+            Variable output1 = NdArrayUtils.elementWiseAdd(outputm1[0], NdArrayUtils.repeat(b1, 10));
             Variable[] outputm2 = ActivationFcns.Sigmoid(NdArrayUtils.matmul(output1, m2));
-            Variable output2 = NdArrayUtils.elementWiseAdd(outputm2[0], NdArrayUtils.repeat(b2, new int[]{10,10}));
-            Variable output3 = NdArrayUtils.elementWiseAdd(NdArrayUtils.matmul(output2, m3), NdArrayUtils.repeat(b3, new int[]{10,1}));
+            Variable output2 = NdArrayUtils.elementWiseAdd(outputm2[0], NdArrayUtils.repeat(b2, 10));
+            Variable output3 = NdArrayUtils.elementWiseAdd(NdArrayUtils.matmul(output2, m3), NdArrayUtils.repeat(b3, 10));
 
-//            System.out.println(output1);
-//            System.out.println(output2);
-//            System.out.println(output3);
-//            System.out.println("-------------");
             Variable minus = NdArrayUtils.elementWiseSub(output3, y);
             Variable loss = NdArrayUtils.elementWiseMultiply(minus, minus);
             if (i/PRINT_PERIOD*PRINT_PERIOD==i) System.out.println(NdArrayUtils.mean(loss));

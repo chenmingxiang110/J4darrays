@@ -7,10 +7,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class ClusterDBScan {
-    int[] labels;
-    ArrayList<Variable> data;
-    float eps;
-    int min_samples;
+    private int[] labels;
+    private ArrayList<Variable> data;
+    private float eps;
+    private int min_samples;
 
     public ClusterDBScan(float eps, int min_samples) {
         this.eps = eps;
