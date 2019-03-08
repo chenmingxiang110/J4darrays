@@ -2,12 +2,78 @@ package tensorMing_Fundation;
 
 public class Initializer {
 
-    public Initializer() {}
+    public static int[] intArange(int shape) {
+        int[] result = new int[shape];
+        for (int i = 0 ; i<shape ; i++) {
+            result[i] = i;
+        }
+        return result;
+    }
+
+    public static int[] intArange(int start, int end) {
+        int[] result = new int[end-start];
+        for (int i = 0 ; i<end-start ; i++) {
+            result[i] = i+start;
+        }
+        return result;
+    }
 
     public static float[] arange(int shape) {
         float[] result = new float[shape];
         for (int i = 0 ; i<shape ; i++) {
             result[i] = i;
+        }
+        return result;
+    }
+
+    public static float[] arange(int shape, float start, float end) {
+        if (shape<2) {
+            throw new IllegalArgumentException("The minimum shape is 2.");
+        }
+        float[] result = new float[shape];
+        float step = (end-start)/(shape-1);
+        float current = start;
+        for (int i = 0 ; i<shape ; i++) {
+            result[i] = current;
+            current+=step;
+        }
+        return result;
+    }
+
+    public static int[][][] meshgrid(int[] x) {
+        return meshgrid(x, x);
+    }
+
+    public static int[][][] meshgrid(int[] x, int[] y) {
+        int[][][] result = new int[2][x.length][y.length];
+        for (int i = 0 ; i<x.length ; i++) {
+            for (int j = 0 ; j<y.length ; j++) {
+                result[0][i][j] = x[i];
+            }
+        }
+        for (int i = 0 ; i<x.length ; i++) {
+            for (int j = 0 ; j<y.length ; j++) {
+                result[1][i][j] = y[j];
+            }
+        }
+        return result;
+    }
+
+    public static float[][][] meshgrid(float[] x) {
+        return meshgrid(x, x);
+    }
+
+    public static float[][][] meshgrid(float[] x, float[] y) {
+        float[][][] result = new float[2][x.length][y.length];
+        for (int i = 0 ; i<x.length ; i++) {
+            for (int j = 0 ; j<y.length ; j++) {
+                result[0][i][j] = x[i];
+            }
+        }
+        for (int i = 0 ; i<x.length ; i++) {
+            for (int j = 0 ; j<y.length ; j++) {
+                result[1][i][j] = y[j];
+            }
         }
         return result;
     }
