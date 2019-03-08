@@ -580,6 +580,13 @@ Modified by: chenmingxiang110
 |Function Name |Inputs |Type |Return |Description |
 |---           |---    |---  |---    |---         |
 |arange|int shape|Static Method|float[]|Return a float[] where the first element is 0, and the last element is shape-1. The size of the array equals to the input integer.|
+|arange|int shape, float start, float end|Static Method|float[]|Return a float[] where the first element is start, and the last element is end. The size of the array equals to shape.|
+|intArange|int shape|Static Method|float[]|Return a int[] where the first element is 0, and the last element is shape-1. The size of the array equals to the input integer.|
+|intArange|int start, int end|Static Method|int[]|Return a int[] where the first element is start, and the last element is end. The size of the array equals to end-start.|
+|meshgrid|int[] x|Static Method|int[] x|See https://www.mathworks.com/help/matlab/ref/meshgrid.html for help. The return array is a 3-D array which equals to [X,Y] as shown in matlab reference.|
+|meshgrid|int[] x|Static Method|int[] x, int[] y|See https://www.mathworks.com/help/matlab/ref/meshgrid.html for help. The return array is a 3-D array which equals to [X,Y] as shown in matlab reference.|
+|meshgrid|float[] x|Static Method|float[] x|See https://www.mathworks.com/help/matlab/ref/meshgrid.html for help. The return array is a 3-D array which equals to [X,Y] as shown in matlab reference.|
+|meshgrid|float[] x|Static Method|float[] x, float[] y|See https://www.mathworks.com/help/matlab/ref/meshgrid.html for help. The return array is a 3-D array which equals to [X,Y] as shown in matlab reference.|
 |zeros1d|int shape|Static Method|float[]|Return an all zero array. The size of the array equals to the input integer.|
 |zeros1d|int[] shape|Static Method|float[]|Return an all zero array. The shape of the array equals to the input array.|
 |zeros2d|int[][] shape|Static Method|float[][]|Return an all zero array. The shape of the array equals to the input array.|
