@@ -1,5 +1,5 @@
 ## Introduction
 
-Although this package is not camparable to numpy or tensorflow, but it is meant to make matrix manipulation and machine learning easier on Java. You can build ndArrays and caculations on them much easier than using the vanilla arrays.
+J4darrays offers comprehensive mathematical functions, random number generators, linear algebra routines, Fourier transforms, and more. It is also a powerful tool to perform n-dimensional array computations such as convolution, matrix multiplication and so on.
 
 ## Quick Start
