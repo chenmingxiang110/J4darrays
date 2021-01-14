@@ -632,7 +632,7 @@ public class NdMath {
         }
     }
 
-    public static void elementwiseMultiply(Object array, double adder) {
+    public static void elementwiseMultiply(Object array, double multiplier) {
         if (!array.getClass().isArray()) {
             throw new IllegalArgumentException("Invalid input. Not an array");
         }
@@ -642,11 +642,11 @@ public class NdMath {
         }
         if (array.getClass().getComponentType().isArray()) {
             for (int i = 0; i < _length; i++) {
-                elementwiseMultiply(Array.get(array, i), adder);
+                elementwiseMultiply(Array.get(array, i), multiplier);
             }
         } else {
             for (int i = 0; i < _length; i++) {
-                Array.set(array, i, Array.getDouble(array, i)*adder);
+                Array.set(array, i, Array.getDouble(array, i)*multiplier);
             }
         }
     }
@@ -700,6 +700,27 @@ public class NdMath {
         } else {
             for (int i = 0; i < _length; i++) {
                 Array.set(array, i, Array.getDouble(array, i)/Array.getDouble(array_, i));
+            }
+        }
+    }
+
+    public static void replaceNanWith(Object array, double newValue) {
+        if (!array.getClass().isArray()) {
+            throw new IllegalArgumentException("Invalid input. Not an array");
+        }
+        int _length = Array.getLength(array);
+        if (_length==0) {
+            return;
+        }
+        if (array.getClass().getComponentType().isArray()) {
+            for (int i = 0; i < _length; i++) {
+                replaceNanWith(Array.get(array, i), newValue);
+            }
+        } else {
+            for (int i = 0; i < _length; i++) {
+                if (Double.isNaN((Double) Array.get(array, i))) {
+                    Array.set(array, i, newValue);
+                }
             }
         }
     }
